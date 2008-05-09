@@ -43,6 +43,7 @@ class CasNetGui:
 本次总费用： 元
 '''
   mode_rb = []
+
   def help(self, widget, data=None):
     dialog = gtk.Dialog('关于 CASNet-GUI', None, 0, (gtk.STOCK_OK, gtk.RESPONSE_OK))
     dialog.set_border_width(25)
@@ -57,18 +58,23 @@ Official Homepage http://share.solrex.cn/casnet/
 在此协议保护之下，您可以自由地使用、修改或分发本软件。
 \n感谢列表：
 　　giv<goldolphin@163.com>: 命令行客户端脚本的原型作者
-   lee<flyli3415@gmail.com>: casnet 图标作者
 '''
     label = gtk.Label(help_str)
     dialog.vbox.pack_start(label, True, True, 0)
     label.show()
     if dialog.run() == gtk.RESPONSE_OK:
       dialog.destroy()
-    return
+    return True
   
   def pop(self, widget, data=None):
     self.window.present()
-    return
+    return True
+
+  def hide(self, widget, data=None):
+    widget.hide()
+    while gtk.events_pending():
+      gtk.main_iteration()
+    return True
 
   def callback_rb(self, widget, data=None):
     if widget.get_active() == 1:
@@ -144,6 +150,10 @@ Official Homepage http://share.solrex.cn/casnet/
     casnetconf.write_ops()
     casnet.login(self.account)
     (ret, retstr) = casnet.online(self.account[4])
+    if ret == False:
+      if retstr.find('Online at other IP!'):
+        casnet.forceoff(self.account)
+        casnet.login(self.account)
     dialog = gtk.Dialog('连接状态', None, 0, (gtk.STOCK_OK, gtk.RESPONSE_OK))
     dialog.set_border_width(25)
     label = gtk.Label(retstr)
@@ -175,7 +185,11 @@ Official Homepage http://share.solrex.cn/casnet/
     self.window.set_icon_from_file(imagepath+'/casnet.png')
     self.window.set_position(gtk.WIN_POS_CENTER_ALWAYS)
     self.window.set_resizable(False)
-    self.window.set_deletable(False)
+    #self.window.set_deletable(False)
+
+    self.window.connect("destroy", self.hide)
+    self.window.connect("delete-event", self.hide)
+
 
     self.window.set_border_width(10)
   
