@@ -45,8 +45,8 @@ Examples:
   casnet on
   casnet query
 
-*NOTE*: Before use "casnet.py", you must configure your account with
-        "casnetconf.py" command. 
+*NOTE*: Before use "casnet", you must configure your account with
+        "casnetconf" command. 
 
 CAS NET 1.0 by Wenbo Yang<solrex@gmail.com>
 Official Homepage http://share.solrex.cn/casnet/
@@ -88,9 +88,9 @@ def online(mode):
   if(res_html.find('连线成功') != -1):
     return (True, 'Online succeeded.')
   elif(res_html.find('已经在此 IP 连线')):
-    return (False, 'Duplicate online request!')
+    return (False, 'Duplicate request!')
   elif(res_html.find('已达到最大连线数')):
-    return (False, 'Online at other IP, "casnet forceoff" to force offline.')
+    return (False, 'Online at other IP!\n "casnet forceoff" to force offline.')
   else:
     return (False, 'Online failed, unknown error!')
 
