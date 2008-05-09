@@ -76,6 +76,12 @@ Official Homepage http://share.solrex.cn/casnet/
       gtk.main_iteration()
     return True
 
+  def pop_menu(self, widget, button, time, data=None):
+    if data:
+      data.show_all()
+      data.popup(None, None, None, 3, time)
+    return True
+
   def callback_rb(self, widget, data=None):
     if widget.get_active() == 1:
       self.account[4] = data
@@ -132,7 +138,8 @@ Official Homepage http://share.solrex.cn/casnet/
       self.trayicon.set_from_file(imagepath+'/offline.png')
       self.trayicon.set_tooltip('CAS NET: Offline')
       self.trayicon.set_visible(True)
-    return
+    self.window.present()
+    return True
 
   def online(self, widget, data=None):
     self.e_user.set_editable(False)
@@ -345,8 +352,35 @@ Official Homepage http://share.solrex.cn/casnet/
     b_help.show()
     bbox.show()
 
+    p_menu = gtk.Menu()
+    menu_item = gtk.MenuItem('  弹出')
+    menu_item.connect('activate', self.pop, None)
+    p_menu.append(menu_item)
+    menu_item = gtk.SeparatorMenuItem()
+    p_menu.append(menu_item)
+    menu_item = gtk.MenuItem('  登录')
+    menu_item.connect('activate', self.online, None)
+    p_menu.append(menu_item)
+    menu_item = gtk.MenuItem('  刷新')
+    menu_item.connect('activate', self.stat, None)
+    p_menu.append(menu_item)
+    menu_item = gtk.MenuItem('  离线')
+    menu_item.connect('activate', self.offline, None)
+    p_menu.append(menu_item)
+    menu_item = gtk.SeparatorMenuItem()
+    p_menu.append(menu_item)
+    menu_item = gtk.MenuItem('  帮助')
+    menu_item.connect('activate', self.help, None)
+    p_menu.append(menu_item)
+    menu_item = gtk.SeparatorMenuItem()
+    p_menu.append(menu_item)
+    menu_item = gtk.MenuItem('  退出')
+    menu_item.connect('activate', self.close_app, None)
+    p_menu.append(menu_item)
+
     self.trayicon = gtk.StatusIcon()
     self.trayicon.connect('activate', self.pop)
+    self.trayicon.connect('popup-menu', self.pop_menu, p_menu)
     self.trayicon.set_from_file(imagepath+'/offline.png')
     self.trayicon.set_tooltip('CAS NET: Offline')
     self.trayicon.set_visible(True)
