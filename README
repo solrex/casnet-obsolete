@@ -1,0 +1,37 @@
+CAS IP Gateway Linux Client(CAS NET)
+
+Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
+Official Homepage http://share.solrex.cn/casnet/
+
+This software licensed under GPL<http://www.gnu.org/licenses/gpl.txt>.
+
+===== System Requirement =====
+
+	* Linux
+	* Gnome Desktop
+	* Python >= 2.4
+	* PyGTK >= 2.10
+
+===== Install and Uninstall =====
+
+	sudo ./install.sh
+	sudo ./uninstall.sh
+
+===== Usage =====
+
+CLI Client:
+
+	$ casnetconf (run once)
+	$ casnet on|off|query|forceoff
+
+GUI Client:
+
+	Applications->Internet->CAS NET
+        or
+        $ casnet-gui
+
+===== BUG Report =====
+
+Please go to http://share.solrex.cn/casnet/bugs.html, check if your bug is
+already in the list. If not, please report it to Wenbo Yang<solrex@gmail.com>
+with email title: "CASNET BUG REPORT". Thanks.

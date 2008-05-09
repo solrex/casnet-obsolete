@@ -1,0 +1,38 @@
+
+=== 1.0-2 ===
+2008.04.05 Wenbo Yang <solrex@gmail.com>
+
+	* NEWS: Version 1.0-2 released, with .deb and .rpm format.
+
+	* install.sh: Change file access permissions.
+	* README,
+	* README_CN.UTF8,
+	* README_CN.GBK: Add bug list URL.
+
+=== 1.0 ===
+2008.04.03 Wenbo Yang <solrex@gmail.com>
+
+	* NEWS: Version 1.0 released.
+
+	* casnetconf.py: Complete the conf module.
+	* casnet.py: Complete the CLI module.
+	* casnet-gui.py: Complete the GUI module.
+	* pics/casnet.png,
+	* pics/online.png,
+	* pics/offline.png: Add trayicons from lee's <flyli3415@gmail.com> kagent
+	software. Thanks!
+	* casnet.desktop: Complete casnet's menu item configuration file.
+	* install.sh: Complete install script.
+	* uninstall.sh: Complete uninstall script.
+	* README,
+	* README_CN.UTF8,
+	* README_CN.GBK: Add readme file.
+
+=== 1.0 Pre ===
+2008.04.01 Wenbo Yang <solrex@gmail.com>
+
+	* NEWS: Fools' Day, a joking 1.0 pre release.
+
+2008.03.31 Wenbo Yang <solrex@gmail.com>
+
+	* casnet-gui.py: Draw the initial GUI interface. 

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=CAS NET
+Name[zh_CN]=中科院网关登录
+Comment=CAS NET Online 
+Comment[zh_CN]=中科院网关登录
+Exec=casnet-gui
+Terminal=false
+Type=Application
+Icon=/usr/share/casnet/pics/casnet.png
+Categories=Application;Network;
