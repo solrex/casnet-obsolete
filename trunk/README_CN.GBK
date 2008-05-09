@@ -1,0 +1,46 @@
+中国科学院 IP 网关 Linux 登录客户端(CAS NET)
+
+Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
+Official Homepage http://share.solrex.cn/casnet/
+
+本软件遵从 GPL 协议<http://www.gnu.org/licenses/gpl.txt>，在此协议保护之下，
+您可以自由地使用、修改或分发本软件。
+
+CAS Net 是中科院内部 IP 控制网关的 Linux 登录客户端，此软件使用 Python 语言写成，
+同时支持命令行和图形界面，使用简单，安装方便，实乃中国科学院 Linux 使用者居家旅行必
+备之良品 :)。
+
+===== 系统要求 =====
+
+    * Linux
+    * Gnome Desktop
+    * Python >= 2.4
+    * PyGTK >= 2.10
+
+===== 安装与卸载 =====
+
+使用命令行运行 sudo ./install.sh 即可将本软件安装到您的操作系统里。
+使用命令行运行 sudo ./unistall.sh 即可将本软件从您的操作系统卸载。
+
+===== 使用方法 =====
+
+命令行客户端：
+
+    在命令行输入 casnetconf，根据提示输入您的用户信息，您的用户信息将被保存到
+    ~/.casnet/account
+    注意，帐户信息仅需输入一次，然后执行下列命令：
+    $ casnet on|off|query|forceoff
+    来连线|离线|查询|强制退出
+
+图形界面客户端：
+
+    从 Applications->Internet->CAS NET 直接执行即可;
+    或者在终端中输入 casnet-gui
+
+===== BUG 报告 =====
+
+因为作者仅在自己拥有的两个 Linux OS 上做了测试，而且测试并不完全。如果您在使用过程
+中发现 BUG，请使用"CASNET BUG REPORT"作为电子邮件标题将其报告给 Wenbo Yang 
+<solrex@gmail.com>。在发送 BUG 报告之前，希望您到
+http://share.solrex.cn/casnet/bugs.html
+检查一下您发现的 BUG 是否已经被别人提交，谢谢。
