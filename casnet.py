@@ -3,7 +3,7 @@
 # This file should be opened with encoding GBK[GB18030, GB2312].
 """
  --------------------------------------------------------------------------
- CAS NET 1.0
+ CAS NET 1.1
  Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
  Official Homepage http://share.solrex.cn/casnet/
  --------------------------------------------------------------------------
@@ -48,7 +48,7 @@ Examples:
 *NOTE*: Before use "casnet", you must configure your account with
         "casnetconf" command. 
 
-CAS NET 1.0 by Wenbo Yang<solrex@gmail.com>
+CAS NET 1.1 by Wenbo Yang<solrex@gmail.com>
 Official Homepage http://share.solrex.cn/casnet/
 '''
   sys.exit(0)

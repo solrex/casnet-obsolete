@@ -39,8 +39,5 @@ CAS Net ÊÇÖÐ¿ÆÔºÄÚ²¿ IP ¿ØÖÆÍø¹ØµÄ Linux µÇÂ¼¿Í»§¶Ë£¬´ËÈí¼þÊ¹ÓÃ Python ÓïÑÔÐ´³É£
 
 ===== BUG ±¨¸æ =====
 
-ÒòÎª×÷Õß½öÔÚ×Ô¼ºÓµÓÐµÄÁ½¸ö Linux OS ÉÏ×öÁË²âÊÔ£¬¶øÇÒ²âÊÔ²¢²»ÍêÈ«¡£Èç¹ûÄúÔÚÊ¹ÓÃ¹ý³Ì
-ÖÐ·¢ÏÖ BUG£¬ÇëÊ¹ÓÃ"CASNET BUG REPORT"×÷Îªµç×ÓÓÊ¼þ±êÌâ½«Æä±¨¸æ¸ø Wenbo Yang 
-<solrex@gmail.com>¡£ÔÚ·¢ËÍ BUG ±¨¸æÖ®Ç°£¬Ï£ÍûÄúµ½
-http://share.solrex.cn/casnet/bugs.html
-¼ì²éÒ»ÏÂÄú·¢ÏÖµÄ BUG ÊÇ·ñÒÑ¾­±»±ðÈËÌá½»£¬Ð»Ð»¡£
+Èç¹ûÄúÔÚÊ¹ÓÃÖÐ·¢ÏÖ BUG£¬Çë½« BUG Ìá½»µ½ http://share.solrex.cn/casnet/bugs.html
+·Ç³£¸ÐÐ»£¡
