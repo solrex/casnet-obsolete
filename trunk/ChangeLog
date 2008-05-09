@@ -1,4 +1,13 @@
 
+=== 1.1-1 ===
+2008.05.09 Wenbo Yang <solrex@gmail.com>
+	
+	* NEWS: Version 1.1-1 released.
+
+	* casnet-gui.py: Added forceoff action if online at other IP.
+					 Added click close button to hide feature.
+					 Added trayicon(StatusIcon) right click menu.
+
 === 1.0-2 ===
 2008.04.05 Wenbo Yang <solrex@gmail.com>
 

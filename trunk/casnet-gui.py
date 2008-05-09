@@ -3,7 +3,7 @@
 
 """
  --------------------------------------------------------------------------
- CAS NET 1.0
+ CAS NET 1.1
  Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
  Official Homepage http://share.solrex.cn/casnet/
  --------------------------------------------------------------------------
@@ -47,7 +47,7 @@ class CasNetGui:
   def help(self, widget, data=None):
     dialog = gtk.Dialog('关于 CASNet-GUI', None, 0, (gtk.STOCK_OK, gtk.RESPONSE_OK))
     dialog.set_border_width(25)
-    help_str = '''CAS Net 1.0 (20080403)
+    help_str = '''CAS Net 1.1 (20080509)
 Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
 Official Homepage http://share.solrex.cn/casnet/
 \n　　CAS Net 是中科院内部 IP 控制网关的 Linux 登录客户端，

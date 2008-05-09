@@ -39,8 +39,5 @@ CAS Net 是中科院内部 IP 控制网关的 Linux 登录客户端，此软件�
 
 ===== BUG 报告 =====
 
-因为作者仅在自己拥有的两个 Linux OS 上做了测试，而且测试并不完全。如果您在使用过程
-中发现 BUG，请使用"CASNET BUG REPORT"作为电子邮件标题将其报告给 Wenbo Yang 
-<solrex@gmail.com>。在发送 BUG 报告之前，希望您到
-http://share.solrex.cn/casnet/bugs.html
-检查一下您发现的 BUG 是否已经被别人提交，谢谢。
+如果您在使用中发现 BUG，请将 BUG 提交到 http://share.solrex.cn/casnet/bugs.html
+非常感谢！
