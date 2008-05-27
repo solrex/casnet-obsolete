@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# GBK encoding is supported after Python 2.4. So if the python version is
+# bellow 2.4, this file should be used instead of casnet.py(GBK format).
 """
  --------------------------------------------------------------------------
  CAS NET 1.1

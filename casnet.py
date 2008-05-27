@@ -3,7 +3,7 @@
 # This file should be opened with encoding GBK[GB18030, GB2312].
 """
  --------------------------------------------------------------------------
- CAS NET 1.1
+ CASNET(IP Gateway Client for GUCAS)
  Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
  Official Homepage http://share.solrex.cn/casnet/
  --------------------------------------------------------------------------
@@ -23,14 +23,15 @@
  --------------------------------------------------------------------------
 """
 
-
 import httplib
 import re
 import sys
 import casnetconf
 
+# Global variable to share connection information between functions.
 conn_info = []
 
+# Display helper information.
 def usage():
   print '''Useage: casnet [options]
 Options:
@@ -48,7 +49,7 @@ Examples:
 *NOTE*: Before use "casnet", you must configure your account with
         "casnetconf" command. 
 
-CAS NET 1.1 by Wenbo Yang<solrex@gmail.com>
+CASNET 1.1 by Wenbo Yang<solrex@gmail.com>
 Official Homepage http://share.solrex.cn/casnet/
 '''
   sys.exit(0)
@@ -183,7 +184,7 @@ Statistics:
 \tNet  Fee: %s RMB
 ''' % retstr
 #(retstr[0], retstr[1], retstr[2], retstr[3], retstr[4], retstr[5], 
-#       retstr[6], retstr[7], retstr[8])
+# retstr[6], retstr[7], retstr[8])
       else:
         result += retstr
     elif(sys.argv[1] == 'query'):
