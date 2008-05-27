@@ -3,7 +3,7 @@
 
 """
  --------------------------------------------------------------------------
- CAS NET 1.1
+ CASNET(IP Gateway Client for GUCAS)
  Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
  Official Homepage http://share.solrex.cn/casnet/
  --------------------------------------------------------------------------
@@ -27,6 +27,7 @@ import pygtk
 pygtk.require('2.0')
 import gtk
 import os
+# Import casnet modules.
 import casnetconf
 import casnet
 
@@ -44,13 +45,14 @@ class CasNetGui:
 '''
   mode_rb = []
 
+  # Show help dialog window.
   def help(self, widget, data=None):
     dialog = gtk.Dialog('关于 CASNet-GUI', None, 0, (gtk.STOCK_OK, gtk.RESPONSE_OK))
     dialog.set_border_width(25)
-    help_str = '''CAS Net 1.1 (20080509)
+    help_str = '''CASNET 1.1 (20080509)
 Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
 Official Homepage http://share.solrex.cn/casnet/
-\n　　CAS Net 是中科院内部 IP 控制网关的 Linux 登录客户端，
+\n　　CASNET 是中科院内部 IP 控制网关的 Linux 登录客户端，
 此软件使用 Python 语言写成，同时支持命令行和图形界面，使
 用简单，安装方便，实乃中国科学院 Linux 使用者居家旅行必备
 之良品 :)。
@@ -66,16 +68,25 @@ Official Homepage http://share.solrex.cn/casnet/
       dialog.destroy()
     return True
   
+  # Method called when status icon was clicked.
   def pop(self, widget, data=None):
-    self.window.present()
+    # If the top window is hided, present it; else, hide it.
+    if self.window.is_active():
+      self.window.hide()
+      while gtk.events_pending():
+        gtk.main_iteration()
+    else:
+      self.window.present()
     return True
 
+  # Method called when close window button was clicked.
   def hide(self, widget, data=None):
-    widget.hide()
+    self.window.hide()
     while gtk.events_pending():
       gtk.main_iteration()
     return True
 
+  # Pop up an menu when right clicking status icon.
   def pop_menu(self, widget, button, time, data=None):
     if data:
       data.show_all()
@@ -128,7 +139,7 @@ Official Homepage http://share.solrex.cn/casnet/
       self.stat_label.show()
       self.stat_frame.show()
       self.trayicon.set_from_file(imagepath+'/online.png')
-      self.trayicon.set_tooltip('CAS NET: Online')
+      self.trayicon.set_tooltip('CASNET: Online')
       self.trayicon.set_visible(True)
     else:
       self.stat_frame.set_label("当前状态：未连线")
@@ -136,7 +147,7 @@ Official Homepage http://share.solrex.cn/casnet/
       self.stat_label.show()
       self.stat_frame.show()
       self.trayicon.set_from_file(imagepath+'/offline.png')
-      self.trayicon.set_tooltip('CAS NET: Offline')
+      self.trayicon.set_tooltip('CASNET: Offline')
       self.trayicon.set_visible(True)
     self.window.present()
     return True
@@ -382,7 +393,7 @@ Official Homepage http://share.solrex.cn/casnet/
     self.trayicon.connect('activate', self.pop)
     self.trayicon.connect('popup-menu', self.pop_menu, p_menu)
     self.trayicon.set_from_file(imagepath+'/offline.png')
-    self.trayicon.set_tooltip('CAS NET: Offline')
+    self.trayicon.set_tooltip('CASNET: Offline')
     self.trayicon.set_visible(True)
 
     main_vbox.show()
