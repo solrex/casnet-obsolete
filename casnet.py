@@ -88,6 +88,8 @@ def online(mode):
   res_html=res.read()
   if(res_html.find('连线成功') != -1):
     return (True, 'Online succeeded.')
+  elif(res_html.find('用户被锁定')):
+    return (False, 'Account locked, pay your bill please!')
   elif(res_html.find('已经在此 IP 连线')):
     return (False, 'Duplicate request!')
   elif(res_html.find('已达到最大连线数')):
@@ -186,7 +188,7 @@ Statistics:
 #(retstr[0], retstr[1], retstr[2], retstr[3], retstr[4], retstr[5], 
 # retstr[6], retstr[7], retstr[8])
       else:
-        result += retstr
+        result += '\n' + retstr
     elif(sys.argv[1] == 'query'):
       ret, retstr = query()
       if ret:
