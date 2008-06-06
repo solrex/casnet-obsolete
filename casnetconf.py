@@ -66,7 +66,8 @@ Official Homepage http://share.solrex.cn/casnet/
 def show():
   # Get the path to account file, location different for POSIX and Windows.
   if os.name == 'nt':
-    homedir = os.getenv('HOMEPATH')
+    homedir = os.getenv('HOMEDRIVE')
+    homedir += os.getenv('HOMEPATH')
   else:
     homedir = os.getenv('HOME')
   casnetfname = homedir + '/.casnet/account'
@@ -122,7 +123,8 @@ def input_arg(str, option):
 def write_ops():
   # Get the path to account file, location different for POSIX and Windows.
   if os.name == 'nt':
-    homedir = os.getenv('HOMEPATH')
+    homedir = os.getenv('HOMEDRIVE')
+    homedir += os.getenv('HOMEPATH')
   else:
     homedir = os.getenv('HOME')
   casnetdir = homedir + '/.casnet'
