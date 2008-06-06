@@ -30,8 +30,9 @@ import os
 # Import casnet modules.
 import casnetconf
 import casnet
+import sys
 
-imagepath = '/usr/share/casnet/pics'
+imagepath = os.path.dirname(sys.argv[0])+'/pics'
 
 class CasNetGui:
   account = ['', 'mails.gucas.ac.cn', '', '210.77.16.29', '2', '1', '0']
@@ -401,7 +402,8 @@ Official Homepage http://share.solrex.cn/casnet/
    
     if self.account[6] == '1' and len(self.account[2]) > 0:
       b_online.clicked()
-
+    if self.window.is_active() == False:
+      self.window.present()
 def main():
   gtk.main()
   return 0
