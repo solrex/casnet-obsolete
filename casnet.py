@@ -88,11 +88,11 @@ def online(mode):
   res_html=res.read()
   if(res_html.find('连线成功') != -1):
     return (True, 'Online succeeded.')
-  elif(res_html.find('用户被锁定')):
+  elif(res_html.find('用户被锁定') != -1):
     return (False, 'Account locked, pay your bill please!')
-  elif(res_html.find('已经在此 IP 连线')):
+  elif(res_html.find('已经在此IP连线') != -1):
     return (False, 'Duplicate request!')
-  elif(res_html.find('已达到最大连线数')):
+  elif(res_html.find('已达到最大连线数') != -1):
     return (False, 'Online at other IP!\n "casnet forceoff" to force offline.')
   else:
     return (False, 'Online failed, unknown error!')
