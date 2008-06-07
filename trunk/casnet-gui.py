@@ -24,15 +24,16 @@
 """
 
 import pygtk
-pygtk.require('2.0')
+import sys
+if not sys.platform == 'win32':
+  pygtk.require('2.0')
 import gtk
 import os
 # Import casnet modules.
 import casnetconf
 import casnet
-import sys
 
-imagepath = os.path.dirname(sys.argv[0])+'/pics'
+imagepath = os.path.join(os.path.dirname(sys.argv[0]), 'pics')
 
 class CasNetGui:
   account = ['', 'mails.gucas.ac.cn', '', '210.77.16.29', '2', '1', '0']
@@ -139,7 +140,7 @@ Official Homepage http://share.solrex.cn/casnet/
       self.stat_label.set_text(stat_str)
       self.stat_label.show()
       self.stat_frame.show()
-      self.trayicon.set_from_file(imagepath+'/online.png')
+      self.trayicon.set_from_file(os.path.join(imagepath, 'online.png'))
       self.trayicon.set_tooltip('CASNET: Online')
       self.trayicon.set_visible(True)
     else:
@@ -147,7 +148,7 @@ Official Homepage http://share.solrex.cn/casnet/
       self.stat_label.set_text(self.stat_str)
       self.stat_label.show()
       self.stat_frame.show()
-      self.trayicon.set_from_file(imagepath+'/offline.png')
+      self.trayicon.set_from_file(os.path.join(imagepath, 'offline.png'))
       self.trayicon.set_tooltip('CASNET: Offline')
       self.trayicon.set_visible(True)
     self.window.present()
@@ -201,7 +202,7 @@ Official Homepage http://share.solrex.cn/casnet/
       self.account = s.split(':')
     self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
     self.window.set_title('中科院网关 Linux 登录客户端')
-    self.window.set_icon_from_file(imagepath+'/casnet.png')
+    self.window.set_icon_from_file(os.path.join(imagepath, 'casnet.png'))
     self.window.set_position(gtk.WIN_POS_CENTER_ALWAYS)
     self.window.set_resizable(False)
     #self.window.set_deletable(False)
@@ -393,7 +394,7 @@ Official Homepage http://share.solrex.cn/casnet/
     self.trayicon = gtk.StatusIcon()
     self.trayicon.connect('activate', self.pop)
     self.trayicon.connect('popup-menu', self.pop_menu, p_menu)
-    self.trayicon.set_from_file(imagepath+'/offline.png')
+    self.trayicon.set_from_file(os.path.join(imagepath, 'offline.png'))
     self.trayicon.set_tooltip('CASNET: Offline')
     self.trayicon.set_visible(True)
 
