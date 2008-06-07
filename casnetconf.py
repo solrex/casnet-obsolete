@@ -65,7 +65,7 @@ Official Homepage http://share.solrex.cn/casnet/
 # Get user information from account file.
 def show():
   # Get the path to account file, location different for POSIX and Windows.
-  if os.name == 'nt':
+  if sys.platform == 'win32':
     homedir = os.getenv('HOMEDRIVE')
     homedir += os.getenv('HOMEPATH')
   else:
@@ -122,7 +122,7 @@ def input_arg(str, option):
 # Write account information in options dictionary to account file.
 def write_ops():
   # Get the path to account file, location different for POSIX and Windows.
-  if os.name == 'nt':
+  if sys.platform == 'win32':
     homedir = os.getenv('HOMEDRIVE')
     homedir += os.getenv('HOMEPATH')
   else:
