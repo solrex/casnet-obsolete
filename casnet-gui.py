@@ -33,7 +33,10 @@ import os
 import casnetconf
 import casnet
 
-imagepath = os.path.join(os.path.dirname(sys.argv[0]), 'pics')
+if sys.platform == 'win32':
+  imagepath = os.path.join(os.path.dirname(__file__), 'pics')
+else:
+  imagepath = '/usr/share/casnet/pics'
 
 class CasNetGui:
   account = ['', 'mails.gucas.ac.cn', '', '210.77.16.29', '2', '1', '0']
