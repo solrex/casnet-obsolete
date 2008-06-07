@@ -70,7 +70,7 @@ def show():
     homedir += os.getenv('HOMEPATH')
   else:
     homedir = os.getenv('HOME')
-  casnetfname = homedir + '/.casnet/account'
+  casnetfname = os.path.join(homedir, '.casnet', 'account')
   # Open and read account information from account file.
   if not os.path.isfile(casnetfname):
     return False
@@ -127,8 +127,8 @@ def write_ops():
     homedir += os.getenv('HOMEPATH')
   else:
     homedir = os.getenv('HOME')
-  casnetdir = homedir + '/.casnet'
-  casnetfname = casnetdir + '/account'
+  casnetdir = os.path.join(homedir, '.casnet')
+  casnetfname = os.path.join(casnetdir, 'account')
   # If application directory does not exist, create it.
   if not os.path.isdir(casnetdir):
     os.mkdir(casnetdir)

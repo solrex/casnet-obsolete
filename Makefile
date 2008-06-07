@@ -6,3 +6,6 @@ install: uninstall casnetconf.py casnet.py casnet-gui.py casnet.desktop
 
 uninstall:
 	@./uninstall.sh
+
+clean:
+	@rm -f *.pyc
