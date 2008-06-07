@@ -34,7 +34,7 @@ import casnetconf
 import casnet
 
 if sys.platform == 'win32':
-  imagepath = os.path.join(os.path.dirname(__file__), 'pics')
+  imagepath = os.path.join(os.path.dirname(sys.argv[0]), 'pics')
 else:
   imagepath = '/usr/share/casnet/pics'
 
