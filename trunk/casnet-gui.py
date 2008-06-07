@@ -54,10 +54,10 @@ class CasNetGui:
     help_str = '''CASNET 1.1 (20080509)
 Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
 Official Homepage http://share.solrex.cn/casnet/
-\n　　CASNET 是中科院内部 IP 控制网关的 Linux 登录客户端，
-此软件使用 Python 语言写成，同时支持命令行和图形界面，使
-用简单，安装方便，实乃中国科学院 Linux 使用者居家旅行必备
-之良品 :)。
+\n　　CASNET 是中科院内部 IP 控制网关登录客户端，支持 Linux
+和 Windows 双系统。此软件使用 Python 语言写成，同时支持命令
+行和图形界面，使用简单，安装方便，实乃中国科学院 IP 网关用户居
+家旅行必备之良品 :)。
 \n本软件遵从 GPL 协议<http://www.gnu.org/licenses/gpl.txt>，
 在此协议保护之下，您可以自由地使用、修改或分发本软件。
 \n感谢列表：
