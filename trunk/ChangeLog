@@ -1,4 +1,19 @@
 
+=== 1.2-1 ===
+2008.06.07 Wenbo Yang <solrex@gmail.com>
+	* NEWS: Version 1.2-1 released.
+
+	* casnet.py: Added account locked case, fixed some bugs.
+	* casnetconf.py,
+	* casnet-gui.py: Added windows system support.
+	* casnet-gui.vbe: Added file, windows program starter.
+	* setup_4_py2exe.py: Added file, windows exe file generator for py2exe.
+	* pics/casnet.ico,
+	* pics/online.ico: Added file, windows icon file for program.
+	* README: Removed file, useless english README.
+	* README_CN.GBK -> README_CN.GBK.txt,
+	* README_CN.UTF8 -> README_CN.UTF8.txt: Changed file extension.
+
 === 1.1-1 ===
 2008.05.09 Wenbo Yang <solrex@gmail.com>
 	
