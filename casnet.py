@@ -26,6 +26,7 @@
 import httplib
 import re
 import sys
+import socket
 import casnetconf
 
 # Global variable to share connection information between functions.
@@ -49,7 +50,7 @@ Examples:
 *NOTE*: Before use "casnet", you must configure your account with
         "casnetconf" command. 
 
-CASNET 1.1 by Wenbo Yang<solrex@gmail.com>
+CASNET 1.2 by Wenbo Yang<solrex@gmail.com>
 Official Homepage http://share.solrex.cn/casnet/
 '''
   sys.exit(0)
@@ -61,7 +62,10 @@ def login(account):
     conn_info.insert(0, conn)
   else:
     conn = conn_info[0]
-  conn.connect()
+  try:
+    conn.connect()
+  except socket.error:
+    return (False, 'Socket error. Please check your network connection.')
   data = 'password=%s&domainid=%s&loginuser=%s' % (account[2],{'mails.gucas.ac.cn':'2', 'gucas.ac.cn':'1'}[account[1]],account[0])
   headers = {'Host':account[3],'User-Agent':'casnet_python',
              'Content-Length':str(len(data)),
@@ -70,13 +74,13 @@ def login(account):
   res = conn.getresponse()
   res_html = res.read()
   if(res_html.find("µÇÂ¼´íÎó") != -1):
-    return False
+    return (False, 'Account error.')
   else:
     cookie = res.getheader('Set-Cookie').split(';')[0]
     headers = {'Host':account[3],'User-Agent':'casnet_python',
                'Cookie':cookie,'Cookie2':'$Version="1"'}
     conn_info.insert(1, headers)
-    return True
+    return (True, 'Login succeeded.')
 
 #Global functions
 def online(mode):
@@ -168,8 +172,9 @@ def main(account=[], verbose=True):
 
   #Global settings
   result = ''
-  if(login(account) == False):
-    return (False, 'Login Failed')
+  ret, retstr = login(account);
+  if(ret == False):
+    result += retstr;
   else:
     if len(sys.argv) == 1:
       usage()
