@@ -54,7 +54,7 @@ class CasNetGui:
   def help(self, widget, data=None):
     dialog = gtk.Dialog('关于 CASNet-GUI', None, 0, (gtk.STOCK_OK, gtk.RESPONSE_OK))
     dialog.set_border_width(25)
-    help_str = '''CASNET 1.1 (20080509)
+    help_str = '''CASNET 1.2 (20080509)
 Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
 Official Homepage http://share.solrex.cn/casnet/
 \n　　CASNET 是中科院内部 IP 控制网关登录客户端，支持 Linux
@@ -128,7 +128,16 @@ Official Homepage http://share.solrex.cn/casnet/
     return
 
   def stat(self, widget, data=None):
-    ret = casnet.login(self.account)
+    (ret, retstr) = casnet.login(self.account)
+    if ret == False:
+      dialog = gtk.Dialog('登录错误', None, 0, (gtk.STOCK_OK, gtk.RESPONSE_OK))
+      dialog.set_border_width(25)
+      label = gtk.Label(retstr)
+      dialog.vbox.pack_start(label, True, True, 0)
+      label.show()
+      if dialog.run() == gtk.RESPONSE_OK:
+        dialog.destroy()
+      return False
     (ret, retstr) = casnet.query()
     if ret == True:
       stat_str = '''
@@ -171,12 +180,21 @@ Official Homepage http://share.solrex.cn/casnet/
     casnetconf.ops['-r'] = self.account[5]
     casnetconf.ops['-a'] = self.account[6]
     casnetconf.write_ops()
-    casnet.login(self.account)
+    (ret, retstr) = casnet.login(self.account)
+    if ret == False:
+      dialog = gtk.Dialog('登录错误', None, 0, (gtk.STOCK_OK, gtk.RESPONSE_OK))
+      dialog.set_border_width(25)
+      label = gtk.Label(retstr)
+      dialog.vbox.pack_start(label, True, True, 0)
+      label.show()
+      if dialog.run() == gtk.RESPONSE_OK:
+        dialog.destroy()
+      return False
     (ret, retstr) = casnet.online(self.account[4])
     if ret == False:
       if retstr.find('Online at other IP!'):
         casnet.forceoff(self.account)
-        casnet.login(self.account)
+        (ret, retstr) = casnet.login(self.account)
     dialog = gtk.Dialog('连接状态', None, 0, (gtk.STOCK_OK, gtk.RESPONSE_OK))
     dialog.set_border_width(25)
     label = gtk.Label(retstr)
@@ -188,7 +206,16 @@ Official Homepage http://share.solrex.cn/casnet/
     return
 
   def offline(self, widget, data=None):
-    casnet.login(self.account)
+    (ret, retstr) = casnet.login(self.account)
+    if ret == False:
+      dialog = gtk.Dialog('登录错误', None, 0, (gtk.STOCK_OK, gtk.RESPONSE_OK))
+      dialog.set_border_width(25)
+      label = gtk.Label(retstr)
+      dialog.vbox.pack_start(label, True, True, 0)
+      label.show()
+      if dialog.run() == gtk.RESPONSE_OK:
+        dialog.destroy()
+      return False
     (ret, retstr) = casnet.offline()
     dialog = gtk.Dialog('连接状态', None, 0, (gtk.STOCK_OK, gtk.RESPONSE_OK))
     dialog.set_border_width(25)
