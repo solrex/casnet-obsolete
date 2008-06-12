@@ -202,7 +202,8 @@ Official Homepage http://share.solrex.cn/casnet/
   def __init__(self):
     # Find casnet icons path.
     if sys.platform == 'win32':
-      self.iconpath = os.path.join(os.path.dirname(sys.argv[0]), 'pics')
+      file_dir = os.path.dirname(sys.argv[0]);
+      self.iconpath = os.path.join(file_dir.decode('gbk').encode('utf8'), 'pics')
     else:
       if os.path.isdir('pics'):
         self.iconpath = 'pics'
