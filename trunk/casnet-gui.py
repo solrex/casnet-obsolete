@@ -121,9 +121,8 @@ Official Homepage http://share.solrex.cn/casnet/
   def changed_cb(self, combobox):
     model = combobox.get_model()
     index = combobox.get_active()
-    if index:
-      self.account[1] = model[index][0]
-    return
+    self.account[1] = model[index][0]
+    return True
 
   def stat(self, widget, data=None):
     (ret, retstr) = casnet.login(self.account)
