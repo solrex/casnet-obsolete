@@ -67,7 +67,7 @@ def show():
   # Get the path to account file, location different for POSIX and Windows.
   if sys.platform == 'win32':
     homedir = os.getenv('HOMEDRIVE')
-    homedir += os.getenv('HOMEPATH')
+    homedir += os.getenv('HOMEPATH').decode('gbk').encode('utf8')
   else:
     homedir = os.getenv('HOME')
   casnetfname = os.path.join(homedir, '.casnet', 'account')
@@ -124,7 +124,7 @@ def write_ops():
   # Get the path to account file, location different for POSIX and Windows.
   if sys.platform == 'win32':
     homedir = os.getenv('HOMEDRIVE')
-    homedir += os.getenv('HOMEPATH')
+    homedir += os.getenv('HOMEPATH').decode('gbk').encode('utf8')
   else:
     homedir = os.getenv('HOME')
   casnetdir = os.path.join(homedir, '.casnet')
