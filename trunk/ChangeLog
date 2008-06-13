@@ -1,4 +1,14 @@
 
+=== 1.2-2 ===
+2008.06.13 Wenbo Yang <solrex@gmail.com>
+	* NEWS: Version 1.2-2 released.
+
+	* casnetconf.py,
+	* casnet-gui.py: Fixed Chinese directory name bug in Windows, Issue 4.
+	* casnet.py: Added socket exception handler.
+	* casnet-gui.py: Reduced code size, fixed account domain bug, Issue 3,
+	    Fixed duplicated online warning report bug related to GUI.
+
 === 1.2-1 ===
 2008.06.07 Wenbo Yang <solrex@gmail.com>
 	* NEWS: Version 1.2-1 released.
