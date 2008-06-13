@@ -178,12 +178,9 @@ Official Homepage http://share.solrex.cn/casnet/
       return False
     (ret, retstr) = casnet.online(self.account[4])
     if ret == False:
-      if retstr.find('Online at other IP!'):
+      if retstr.find('Online at other IP!') != -1:
         casnet.forceoff(self.account)
         (ret, retstr) = casnet.login(self.account)
-      else:
-        self.pop_dialog('连线错误', 'retstr')
-        return False
     self.pop_dialog('连接状态', retstr)
     self.stat(None, None)
     return True
