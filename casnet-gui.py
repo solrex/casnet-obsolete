@@ -24,10 +24,10 @@
 
 import sys
 import os
-import gtk
 import pygtk
 if not sys.platform == 'win32':
   pygtk.require('2.0')
+import gtk
 # Import casnet modules.
 import casnetconf
 import casnet
@@ -121,8 +121,9 @@ Official Homepage http://share.solrex.cn/casnet/
   def changed_cb(self, combobox):
     model = combobox.get_model()
     index = combobox.get_active()
-    self.account[1] = model[index][0]
-    return True
+    if index:
+      self.account[1] = model[index][0]
+    return
 
   def stat(self, widget, data=None):
     (ret, retstr) = casnet.login(self.account)
@@ -178,9 +179,12 @@ Official Homepage http://share.solrex.cn/casnet/
       return False
     (ret, retstr) = casnet.online(self.account[4])
     if ret == False:
-      if retstr.find('Online at other IP!') != -1:
+      if retstr.find('Online at other IP!'):
         casnet.forceoff(self.account)
         (ret, retstr) = casnet.login(self.account)
+      else:
+        self.pop_dialog('连线错误', 'retstr')
+        return False
     self.pop_dialog('连接状态', retstr)
     self.stat(None, None)
     return True
