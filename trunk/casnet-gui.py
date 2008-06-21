@@ -197,6 +197,8 @@ Official Homepage http://share.solrex.cn/casnet/
     (ret, retstr) = casnet.offline()
     self.pop_dialog('连接状态', retstr)
     self.stat(None, None)
+    self.e_user.set_editable(True)
+    self.e_passwd.set_editable(True)
     return True
 
   def __init__(self):
