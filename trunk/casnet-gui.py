@@ -182,7 +182,7 @@ Official Homepage http://share.solrex.cn/casnet/
       casnet.forceoff(self.account)
       (ret, retstr) = casnet.login(self.account)
     if ret == False:
-      self.pop_dialog('连线错误', 'retstr')
+      self.pop_dialog('连线错误', retstr)
       return False
     self.stat(None, None)
     return True
