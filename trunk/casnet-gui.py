@@ -178,14 +178,12 @@ Official Homepage http://share.solrex.cn/casnet/
       self.pop_dialog('登录错误', retstr)
       return False
     (ret, retstr) = casnet.online(self.account[4])
+    if ret == False and retstr.find('Online at other IP!'):
+      casnet.forceoff(self.account)
+      (ret, retstr) = casnet.login(self.account)
     if ret == False:
-      if retstr.find('Online at other IP!'):
-        casnet.forceoff(self.account)
-        (ret, retstr) = casnet.login(self.account)
-      else:
-        self.pop_dialog('连线错误', 'retstr')
-        return False
-    self.pop_dialog('连接状态', retstr)
+      self.pop_dialog('连线错误', 'retstr')
+      return False
     self.stat(None, None)
     return True
 
@@ -195,7 +193,9 @@ Official Homepage http://share.solrex.cn/casnet/
       self.pop_dialog('登录错误', retstr)
       return False
     (ret, retstr) = casnet.offline()
-    self.pop_dialog('连接状态', retstr)
+    if ret == False:
+      self.pop_dialog('连接状态', retstr)
+      return False
     self.stat(None, None)
     self.e_user.set_editable(True)
     self.e_passwd.set_editable(True)
