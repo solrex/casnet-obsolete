@@ -95,7 +95,7 @@ def online(mode):
   elif(res_html.find('用户被锁定') != -1):
     return (False, 'Account locked, pay your bill please!')
   elif(res_html.find('已经在此IP连线') != -1):
-    return (False, 'Duplicate request!')
+    return (True, 'Duplicate request!')
   elif(res_html.find('已达到最大连线数') != -1):
     return (False, 'Online at other IP!\n "casnet forceoff" to force offline.')
   else:
