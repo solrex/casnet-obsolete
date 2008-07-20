@@ -92,8 +92,11 @@ def parse_args(argv):
       if option == '--help':
         usage()
       elif option == '--show':
-        print show()
-        print 'You have no saved information. Please reconfig.'
+        ans = show()
+        if ans == False:
+          print 'You have no saved information. Please reconfig.'
+        else:
+          print ans
         sys.exit(0)
       else:
         print >>sys.stderr, "Unrecognized option \"%s\", ignored!" % option
