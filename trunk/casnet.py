@@ -180,6 +180,9 @@ def main(account=[], verbose=True):
       usage()
     elif sys.argv[1] == 'on':
       ret, retstr = online(account[4])
+      if ret == False and retstr.find('Online at other IP!') != -1:
+        forceoff(account)
+        ret, retstr = online(account[4])
       result += retstr
       ret, retstr = query()
       if ret:
