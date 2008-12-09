@@ -39,7 +39,7 @@ Options:
   [None]\tPrint this message
   on\t\tOnline
   off\t\tOffline
-  query\t\tPrint account statistics
+  query\t\tPrint account account information
   forceoff\tForce offline
   --help\tPrint this message
 
@@ -187,7 +187,7 @@ def main(account=[], verbose=True):
       ret, retstr = query()
       if ret:
         result += '''\nOnline Time: %s, Mode: %s
-Statistics:
+Account information:
 \tGucasNet: %sMB(up)\t%sMB(down)
 \tChinaNet: %sMB(up)\t%sMB(down)
 \tInternet: %sMB(up)\t%sMB(down)
@@ -201,7 +201,7 @@ Statistics:
       ret, retstr = query()
       if ret:
         result += '''\nOnline Time: %s, Mode: %s
-Statistics:
+Account information:
 \tGucasNet: %sMB(up)\t%sMB(down)
 \tChinaNet: %sMB(up)\t%sMB(down)
 \tInternet: %sMB(up)\t%sMB(down)
@@ -212,7 +212,7 @@ Statistics:
       ret, retstr = query()
       if ret:
         result += '''\nOnline Time: %s, Mode: %s
-Statistics:
+Account information:
 \tGucasNet: %sMB(up)\t%sMB(down)
 \tChinaNet: %sMB(up)\t%sMB(down)
 \tInternet: %sMB(up)\t%sMB(down)
