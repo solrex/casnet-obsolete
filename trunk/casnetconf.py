@@ -33,7 +33,9 @@ ops = {
   '-ip': '210.77.16.29',
   '-m': '2',
   '-r': '1',
-  '-a': '1'
+  '-a': '0',
+  '-ar': '0',
+  '-al': '0',
 }
 
 # Print the help information.
@@ -46,7 +48,9 @@ Options:
   -ip <server IP>\tServer IP address, default: 210.77.16.29
   -m <login mode>\t0:SchoolNet, 1:ChinaNet, 2:Internet, default: 2
   -r <remeber password>\t0:no, 1:yes, default: 1
-  -a <auto login>\t0:no, 1:yes, default: 1
+  -a <auto login>\t0:no, 1:yes, default: 0
+  -ar <auto reconnect>\t0:no, 1:yes, default: 0
+  -al <alert when deposit < 50\t0:no, 1:yes, default: 0
   --help \t\tPrint this message
   --show \t\tPrint account string
 
@@ -147,8 +151,8 @@ def write_ops():
     line = ops['-u'] + ':' + ops['-d'] + '::'
   else:
     line = ops['-u'] + ':' + ops['-d'] + ':' + ops['-p'] + ':'
-  line = line + ops['-ip'] + ':' + ops['-m'] + ':'
-  line = line + ops['-r'] + ':'+ ops['-a']
+  line += ops['-ip'] + ':' + ops['-m'] + ':'
+  line += ops['-r'] + ':' + ops['-a'] + ':' + ops['-ar'] + ':' + ops['-al']
   casnetfile.write(line)
   casnetfile.close()
   return True
@@ -171,7 +175,9 @@ def main(argv=sys.argv, verbose=True):
     while ops['-p'] == '':
       input_arg('password', '-p')
     input_arg('remember password(0:no, 1:yes; default 1)', '-r')
-    input_arg('auto login(0:no, 1:yes; default 1)', '-a')
+    input_arg('auto login(0:no, 1:yes; default 0)', '-a')
+    input_arg('auto reconnect(0:no, 1:yes; default 0)', '-ar')
+    input_arg('alert when deposit < 50 RMB(0:no, 1:yes; default 0)', '-al')
   # If verbose is True(that means 'casnetconf' runs alone), print user's
   # information to confirm. Or(that means 'casnetconf' is called as a module)
   # do nothing. 
@@ -184,6 +190,8 @@ def main(argv=sys.argv, verbose=True):
     print '  Login mode(0:SchoolNet,1:ChinaNet,2:Internet): \t%s' % ops['-m']
     print '  Remember passwd(0:no,1:yes): \t%s' % ops['-r']
     print '  Auto login(0:no,1:yes): \t%s' % ops['-a']
+    print '  Auto reconnect(0:no,1:yes): \t%s' % ops['-ar']
+    print '  Alert when deposit < 50 RMB(0:no,1:yes): \t%s' % ops['-al']
   # Write the options to account file.
   write_ops()
   return True

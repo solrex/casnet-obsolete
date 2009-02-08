@@ -33,7 +33,7 @@ import casnetconf
 import casnet
 
 class CasNetGui:
-  account = ['', 'mails.gucas.ac.cn', '', '210.77.16.29', '2', '1', '0']
+  account = ['', 'mails.gucas.ac.cn', '', '210.77.16.29', '2', '1', '0', '0', '0']
   stat_str = '''
 本次连线时间：
 本次连线方式：
@@ -43,6 +43,7 @@ class CasNetGui:
 本次总费用： 元
 '''
   mode_rb = []
+  status = 0
 
   # Helper function for pop up a simple dialog window.
   def pop_dialog(self, title, data):
@@ -97,8 +98,14 @@ Official Homepage http://share.solrex.cn/casnet/
     return True
 
   def callback_rb(self, widget, data=None):
+    # Radio check boxes call back function.
     if widget.get_active() == 1:
-      self.account[4] = data
+      if self.status == 0:
+        self.account[4] = data
+      elif self.status == 1:
+        casnet.offline()
+        self.account[4] = data
+        casnet.online(self.account[4])
     return True
 
   def callback_cb(self, widget, data=None):
@@ -107,11 +114,20 @@ Official Homepage http://share.solrex.cn/casnet/
       if not widget.get_active():
         self.c_auto.set_active(False)
         self.account[6] = '0'
+        self.c_auto_re.set_active(False)
+        self.account[7] = '0'
     elif data == 1:
       if self.c_rem.get_active():
         self.account[6] = ('0', '1')[widget.get_active()]
       else:
         self.c_auto.set_active(False)
+    elif data == 2:
+      if self.c_rem.get_active():
+        self.account[7] = ('0', '1')[widget.get_active()]
+      else:
+        self.c_auto_re.set_active(False)
+    elif data == 3:
+      self.account[8] = ('0', '1')[widget.get_active()]
     return True
 
   def close_app(self, widget, data=None):
@@ -160,8 +176,10 @@ Official Homepage http://share.solrex.cn/casnet/
     return True
 
   def online(self, widget, data=None):
+    # Disable changing username and passwd before login.
     self.e_user.set_editable(False)
     self.e_passwd.set_editable(False)
+    # Get account information.
     self.account[0] = self.e_user.get_text()
     self.account[2] = self.e_passwd.get_text()
     self.account[3] = self.e_server.get_text()
@@ -172,18 +190,26 @@ Official Homepage http://share.solrex.cn/casnet/
     casnetconf.ops['-m'] = self.account[4]
     casnetconf.ops['-r'] = self.account[5]
     casnetconf.ops['-a'] = self.account[6]
+    casnetconf.ops['-ar'] = self.account[7]
+    casnetconf.ops['-al'] = self.account[8]
+    # Store account information to account file.
     casnetconf.write_ops()
+    # Login
     (ret, retstr) = casnet.login(self.account)
     if ret == False:
       self.pop_dialog('登录错误', retstr)
       return False
+    # Online
     (ret, retstr) = casnet.online(self.account[4])
     if ret == False and retstr.find('Online at other IP!') != -1:
       casnet.forceoff(self.account)
       (ret, retstr) = casnet.login(self.account)
     if ret == False:
       self.pop_dialog('连线错误', retstr)
+      self.status = 0
       return False
+    self.status = 1
+    # Get account statistics information.
     self.stat(None, None)
     return True
 
@@ -219,13 +245,15 @@ Official Homepage http://share.solrex.cn/casnet/
     s = casnetconf.show()
     if s != False:
       self.account = s.split(':')
+
     # Set main window's attributes.
     self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
-    self.window.set_title('中科院网关 Linux 登录客户端')
+    self.window.set_title('中科院网关跨平台登录客户端')
     self.window.set_icon_from_file(os.path.join(self.iconpath, 'casnet.png'))
     self.window.set_position(gtk.WIN_POS_CENTER_ALWAYS)
     self.window.set_resizable(False)
     self.window.set_border_width(10)
+
     # Connect close window events to user defined function.
     self.window.connect("destroy", self.hide)
     self.window.connect("delete-event", self.hide)
@@ -315,6 +343,7 @@ Official Homepage http://share.solrex.cn/casnet/
     frame = gtk.Frame('连线方式')
     main_vbox.pack_start(frame, True, True, 0)
 
+    # Connection mode radio check boxes.
     radio_bbox = gtk.HButtonBox()
     radio_bbox.set_border_width(10)
     frame.add(radio_bbox)
@@ -338,6 +367,7 @@ Official Homepage http://share.solrex.cn/casnet/
     radio_bbox.show()
     frame.show()
 
+    # General option check boxes.
     bbox = gtk.HButtonBox()
     bbox.set_border_width(10)
     main_vbox.pack_start(bbox, False, True, 0)
@@ -353,6 +383,24 @@ Official Homepage http://share.solrex.cn/casnet/
     self.c_auto.set_active(int(self.account[6]))
     bbox.add(self.c_auto)
     self.c_auto.show()
+    bbox.show()
+
+    bbox = gtk.HButtonBox()
+    bbox.set_border_width(10)
+    main_vbox.pack_start(bbox, False, True, 0)
+
+    self.c_auto_re = gtk.CheckButton('断线自动重连')
+    self.c_auto_re.connect('toggled', self.callback_cb, 2)
+    self.c_auto.set_active(int(self.account[7]))
+    bbox.add(self.c_auto_re)
+    self.c_auto_re.show()
+    bbox.show()
+
+    self.c_alert = gtk.CheckButton('余额不足提醒')
+    self.c_alert.connect('toggled', self.callback_cb, 3)
+    self.c_alert.set_active(int(self.account[8]))
+    bbox.add(self.c_alert)
+    self.c_alert.show()
     bbox.show()
 
     separator = gtk.HSeparator()
@@ -419,8 +467,10 @@ Official Homepage http://share.solrex.cn/casnet/
     main_vbox.show()
     self.window.show()
    
+    # Auto login. 
     if self.account[6] == '1' and len(self.account[2]) > 0:
       b_online.clicked()
+
     if self.window.is_active() == False:
       self.window.present()
 def main():
