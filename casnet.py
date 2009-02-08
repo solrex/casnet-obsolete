@@ -166,7 +166,7 @@ def forceoff(account):
   return (False, 'Force offline failed, unkown error.')
 
 def main(account=[], verbose=True):
-  if len(account) != 7:
+  if len(account) != 9:
     s = casnetconf.show()
     account = s.split(':')
 
