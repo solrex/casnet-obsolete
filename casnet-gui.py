@@ -23,14 +23,40 @@
 """
 
 import sys
-import os
+from os import path
+from threading import Thread
+
 import pygtk
 if not sys.platform == 'win32':
   pygtk.require('2.0')
 import gtk
+import gobject
+import time
+
 # Import casnet modules.
 import casnetconf
 import casnet
+
+gobject.threads_init()
+
+class ARThread(Thread):
+  def __init__(self, mainWin):
+    super(ARThread, self).__init__()
+    self.mainWin = mainWin
+    self.now = time.time()
+
+  def run(self):
+    while self.mainWin.status != -1:
+      if self.mainWin.status == 0:
+        continue;
+      Now = time.time()
+      if Now - self.now > 600:
+        self.now = Now
+        (ret, retstr) = casnet.query()
+        if ret == False:
+          self.mainWin.online(None)
+    return True
+      
 
 class CasNetGui:
   account = ['', 'mails.gucas.ac.cn', '', '210.77.16.29', '2', '1', '0', '0', '0']
@@ -44,6 +70,7 @@ class CasNetGui:
 '''
   mode_rb = []
   status = 0
+  ar_thread = None
 
   # Helper function for pop up a simple dialog window.
   def pop_dialog(self, title, data):
@@ -103,9 +130,9 @@ Official Homepage http://share.solrex.cn/casnet/
       if self.status == 0:
         self.account[4] = data
       elif self.status == 1:
-        casnet.offline()
+        self.offline(None)
         self.account[4] = data
-        casnet.online(self.account[4])
+        self.online(None)
     return True
 
   def callback_cb(self, widget, data=None):
@@ -131,6 +158,7 @@ Official Homepage http://share.solrex.cn/casnet/
     return True
 
   def close_app(self, widget, data=None):
+    self.status = -1
     gtk.main_quit()
     return False
 
@@ -160,7 +188,7 @@ Official Homepage http://share.solrex.cn/casnet/
       self.stat_label.set_text(stat_str)
       self.stat_label.show()
       self.stat_frame.show()
-      self.trayicon.set_from_file(os.path.join(self.iconpath, 'online.png'))
+      self.trayicon.set_from_file(path.join(self.iconpath, 'online.png'))
       self.trayicon.set_tooltip('CASNET: Online')
       self.trayicon.set_visible(True)
     else:
@@ -168,7 +196,7 @@ Official Homepage http://share.solrex.cn/casnet/
       self.stat_label.set_text(self.stat_str)
       self.stat_label.show()
       self.stat_frame.show()
-      self.trayicon.set_from_file(os.path.join(self.iconpath, 'offline.png'))
+      self.trayicon.set_from_file(path.join(self.iconpath, 'offline.png'))
       self.trayicon.set_tooltip('CASNET: Offline')
       self.trayicon.set_visible(True)
     if not self.window.is_active():
@@ -208,6 +236,10 @@ Official Homepage http://share.solrex.cn/casnet/
       self.pop_dialog('连线错误', retstr)
       self.status = 0
       return False
+    # Auto reconnect.
+    if self.account[7] == '1' and self.ar_thread == None:
+      self.ar_thread = ARThread(self)
+      self.ar_thread.start()
     self.status = 1
     # Get account statistics information.
     self.stat(None, None)
@@ -225,19 +257,20 @@ Official Homepage http://share.solrex.cn/casnet/
     self.stat(None, None)
     self.e_user.set_editable(True)
     self.e_passwd.set_editable(True)
+    self.status = 0
     return True
 
   def __init__(self):
     # Find casnet icons path.
     if sys.platform == 'win32':
-      file_dir = os.path.dirname(sys.argv[0]);
-      self.iconpath = os.path.join(file_dir.decode('gbk').encode('utf8'), 'pics')
+      file_dir = path.dirname(sys.argv[0]);
+      self.iconpath = path.join(file_dir.decode('gbk').encode('utf8'), 'pics')
     else:
-      if os.path.isdir('pics'):
+      if path.isdir('pics'):
         self.iconpath = 'pics'
-      elif os.path.isdir('../share/casnet/pics'):
+      elif path.isdir('../share/casnet/pics'):
         self.iconpath = '../share/casnet/pics'
-      elif os.path.isdir('/usr/share/casnet/pics'):
+      elif path.isdir('/usr/share/casnet/pics'):
         self.iconpath = '/usr/share/casnet/pics'
       else:
         self.pop_dialog('Error', 'Can not find casnet icons.')
@@ -249,7 +282,7 @@ Official Homepage http://share.solrex.cn/casnet/
     # Set main window's attributes.
     self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
     self.window.set_title('中科院网关跨平台登录客户端')
-    self.window.set_icon_from_file(os.path.join(self.iconpath, 'casnet.png'))
+    self.window.set_icon_from_file(path.join(self.iconpath, 'casnet.png'))
     self.window.set_position(gtk.WIN_POS_CENTER_ALWAYS)
     self.window.set_resizable(False)
     self.window.set_border_width(10)
@@ -460,7 +493,7 @@ Official Homepage http://share.solrex.cn/casnet/
     self.trayicon = gtk.StatusIcon()
     self.trayicon.connect('activate', self.icon_pop)
     self.trayicon.connect('popup-menu', self.pop_menu, p_menu)
-    self.trayicon.set_from_file(os.path.join(self.iconpath, 'offline.png'))
+    self.trayicon.set_from_file(path.join(self.iconpath, 'offline.png'))
     self.trayicon.set_tooltip('CASNET: Offline')
     self.trayicon.set_visible(True)
 
@@ -473,10 +506,11 @@ Official Homepage http://share.solrex.cn/casnet/
 
     if self.window.is_active() == False:
       self.window.present()
+
 def main():
+  CasNetGui()
   gtk.main()
   return 0
 
 if __name__ == '__main__':
-  CasNetGui()
   main()
