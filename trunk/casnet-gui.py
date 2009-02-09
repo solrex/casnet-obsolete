@@ -90,7 +90,7 @@ class CasNetGui:
 
   # Show help dialog window.
   def help(self, widget, data=None):
-    help_str = '''CASNET 1.2 (20080509)
+    help_str = '''CASNET 1.3 (20090209)
 Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
 Official Homepage http://share.solrex.cn/casnet/
 \n　　CASNET 是中科院内部 IP 控制网关登录客户端，支持 Linux
