@@ -195,6 +195,12 @@ Official Homepage http://share.solrex.cn/casnet/
       self.trayicon.set_from_file(path.join(self.iconpath, 'online.png'))
       self.trayicon.set_tooltip('CASNET: Online')
       self.trayicon.set_visible(True)
+      if self.account[8] == '1' and int(time.strftime('%d')) > 25:
+        if float(retstr[8]) < 50:
+          str = '''您的余额(%s)已不足50元，为不影响您下月的正常使用，
+请尽快到离您最近的科苑黑心网关营业厅充值。
+''' % retstr[8]
+        self.pop_dialog('余额不足提醒', str)
     else:
       self.stat_frame.set_label("当前状态：未连线")
       self.stat_label.set_text(self.stat_str)
