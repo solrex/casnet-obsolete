@@ -214,6 +214,8 @@ Official Homepage http://share.solrex.cn/casnet/
     return True
 
   def online(self, widget, data=None):
+    if widget.get_active() == False:
+      return True
     # Disable changing username and passwd before login.
     self.e_user.set_editable(False)
     self.e_passwd.set_editable(False)
@@ -253,9 +255,12 @@ Official Homepage http://share.solrex.cn/casnet/
     self.status = 1
     # Get account statistics information.
     self.stat(None, None)
+    self.b_offline.set_active(False)
     return True
 
   def offline(self, widget, data=None):
+    if widget.get_active() == False:
+      return True
     (ret, retstr) = casnet.login(self.account)
     if ret == False:
       self.pop_dialog('登录错误', retstr)
@@ -268,6 +273,7 @@ Official Homepage http://share.solrex.cn/casnet/
     self.e_user.set_editable(True)
     self.e_passwd.set_editable(True)
     self.status = 0
+    self.b_online.set_active(False)
     return True
 
   def __init__(self):
@@ -454,18 +460,18 @@ Official Homepage http://share.solrex.cn/casnet/
     bbox.set_border_width(10)
     main_vbox.pack_start(bbox, False, True, 0)
 
-    b_online = gtk.ToggleButton('连线')
-    b_online.connect('toggled', self.online, None)
-    bbox.add(b_online)
-    b_online.set_flags(gtk.CAN_DEFAULT)
-    b_online.grab_default()
-    b_online.show()
+    self.b_online = gtk.ToggleButton('连线')
+    self.b_online.connect('toggled', self.online, None)
+    bbox.add(self.b_online)
+    # Set it as the default button of this window.
+    self.b_online.set_flags(gtk.CAN_DEFAULT)
+    self.b_online.grab_default()
+    self.b_online.show()
 
-    b_offline = gtk.ToggleButton('离线')
-    b_offline.connect('toggled', self.offline, None)
-    b_offline.set_inconsistent(True)
-    bbox.add(b_offline)
-    b_offline.show()
+    self.b_offline = gtk.ToggleButton('离线')
+    self.b_offline.connect('toggled', self.offline, None)
+    bbox.add(self.b_offline)
+    self.b_offline.show()
 
 
     b_help = gtk.Button('退出')
