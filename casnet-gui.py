@@ -520,7 +520,7 @@ Official Homepage http://share.solrex.cn/casnet/
    
     # Auto login. 
     if self.account[6] == '1' and len(self.account[2]) > 0:
-      b_online.clicked()
+      self.b_online.clicked()
 
     if self.window.is_active() == False:
       self.window.present()
