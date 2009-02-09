@@ -1,4 +1,16 @@
 
+=== 1.3-0 ===
+2009.02.09 Wenbo Yang <solrex@gmail.com>
+	* NEWS: Version 1.3-0 released.
+
+	* casnetconf.py: Added 2 domain in account file for 2 new options.
+	* casnet.py: Changed output format, Added default forceoff action,
+	    Marked duplicated requests as success return.
+	* casnet-gui.py: Removed annoying dialog boxes when no error happens,
+	    Added online mode changing, auto reconnecting, remind 
+		insufficient balance support, Fixed Issue 6.
+
+
 === 1.2-2 ===
 2008.06.13 Wenbo Yang <solrex@gmail.com>
 	* NEWS: Version 1.2-2 released.
