@@ -214,8 +214,9 @@ Official Homepage http://share.solrex.cn/casnet/
     return True
 
   def online(self, widget, data=None):
-    if widget.get_active() == False:
-      return True
+    if widget != None:
+      if widget.get_active() == False:
+        return True
     # Disable changing username and passwd before login.
     self.e_user.set_editable(False)
     self.e_passwd.set_editable(False)
@@ -259,8 +260,9 @@ Official Homepage http://share.solrex.cn/casnet/
     return True
 
   def offline(self, widget, data=None):
-    if widget.get_active() == False:
-      return True
+    if widget != None:
+      if widget.get_active() == False:
+        return True
     (ret, retstr) = casnet.login(self.account)
     if ret == False:
       self.pop_dialog('登录错误', retstr)
