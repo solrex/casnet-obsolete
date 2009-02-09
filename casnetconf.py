@@ -83,6 +83,8 @@ def show():
     line = casnetfile.readline()
     if line == '':
       return False
+    if line.count(':') == 6:
+      line = line.rstrip('\n') + ':0:0'
     casnetfile.close()
     return line
 
