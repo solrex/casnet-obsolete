@@ -39,25 +39,27 @@ import casnet
 
 gobject.threads_init()
 
+# Auto Reconnect Thread that works in background.
 class ARThread(Thread):
   def __init__(self, mainWin):
     super(ARThread, self).__init__()
-    self.mainWin = mainWin
-    self.now = time.time()
+    self.mainWin = mainWin         # the main CasNetGui object
+    self.last_con = time.time()    # time of last connection
 
   def run(self):
+    # While mainWin's status signal is not "quit".
     while self.mainWin.status != -1:
-      if self.mainWin.status == 0:
-        continue;
       Now = time.time()
-      if Now - self.now > 600:
-        self.now = Now
-        (ret, retstr) = casnet.query()
+      # Compared now time with last connection time. Test if the interval is 
+      # larger than 600 second(10 min).
+      if self.mainWin.status == 1 and (Now - self.last_con) > 600:
+        self.last_con = Now
+        (ret, retstr) = casnet.query()     # Still online?
         if ret == False:
-          self.mainWin.online(None)
+          self.mainWin.online(None)        # Reconnect
     return True
-      
 
+# Main gui class.
 class CasNetGui:
   account = ['', 'mails.gucas.ac.cn', '', '210.77.16.29', '2', '1', '0', '0', '0']
   stat_str = '''
@@ -69,7 +71,9 @@ class CasNetGui:
 本次总费用： 元
 '''
   mode_rb = []
+  # Status used as a signal. 0: offline, 1: online, -1: quit
   status = 0
+  # Back groud thread object.
   ar_thread = None
 
   # Helper function for pop up a simple dialog window.
@@ -424,7 +428,7 @@ Official Homepage http://share.solrex.cn/casnet/
 
     self.c_auto_re = gtk.CheckButton('断线自动重连')
     self.c_auto_re.connect('toggled', self.callback_cb, 2)
-    self.c_auto.set_active(int(self.account[7]))
+    self.c_auto_re.set_active(int(self.account[7]))
     bbox.add(self.c_auto_re)
     self.c_auto_re.show()
     bbox.show()
