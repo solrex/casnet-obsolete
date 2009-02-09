@@ -68,7 +68,7 @@ class CasNetGui:
 本月城域流量： MB↑\t MB↓
 本月国内流量： MB↑\t MB↓
 本月国际流量： MB↑\t MB↓
-本次总费用： 元
+账户余额： 元
 '''
   mode_rb = []
   # Status used as a signal. 0: offline, 1: online, -1: quit
@@ -186,7 +186,7 @@ Official Homepage http://share.solrex.cn/casnet/
 本月城域流量： %s MB↑\t%s MB↓
 本月国内流量： %s MB↑\t%s MB↓
 本月国际流量： %s MB↑\t%s MB↓
-本次总费用： %s 元
+账户余额： %s 元
 ''' % retstr
       self.stat_frame.set_label("当前状态：已连线")
       self.stat_label.set_text(stat_str)

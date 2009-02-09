@@ -56,7 +56,7 @@ Official Homepage http://share.solrex.cn/casnet/
   sys.exit(0)
 
 def login(account):
-  #return True
+  #return (True, 'Login succeeded.')
   if len(conn_info) == 0:
     conn = httplib.HTTPSConnection(account[3])
     conn_info.insert(0, conn)
@@ -74,7 +74,7 @@ def login(account):
   res = conn.getresponse()
   res_html = res.read()
   if(res_html.find("登录错误") != -1):
-    return (False, 'Account error.')
+    return (False, 'Account error, check your username and password.')
   else:
     cookie = res.getheader('Set-Cookie').split(';')[0]
     headers = {'Host':account[3],'User-Agent':'casnet_python',
@@ -118,20 +118,30 @@ def query():
   modes_dic = {'城域':'GucasNet','国内':'ChinaNet','国际':'Internet'}
   conn = conn_info[0]
   headers = conn_info[1]
+  # Get online status information.
   conn.request('GET','/php/onlinestatus.php', None, headers)
   res = conn.getresponse()
   res_html = res.read()
-  if(res_html.find('用户连线状态')!=-1):
+  a = None
+  c = None
+  if res_html.find('用户连线状态') != -1:
     a = re.search(r"连线时间.*?center\">(.*?)</div>.*?center.*?城域流量.*?right\">(.*?)&nb.*?↑<br>(.*?)&nbsp;.*?连线方式.*?<div align=\"center\">(.*?)</div>.*?国内流量.*?right\">(.*?)&nb.*?↑<br>(.*?)&nb.*?总费用.*?center\">(.*?)元.*?国际流量.*?right\">(.*?)&nb.*?↑<br>(.*?)&nbsp",
     res_html, re.S)
-    if(a != None):
+    if a != None:
       b = a.groups()
-      stat = (b[0], modes_dic[b[3]], b[1], b[2], b[4], b[5], b[7], b[8], b[6])
-      return (True, stat)
-    else:
-      return (False, 'Query failed, online first please!')
+  # Get remain fee information
+  conn.request('GET','/php/remain_fee.php', None, headers)
+  res = conn.getresponse()
+  res_html = res.read()
+  if res_html.find('√查询成功') != -1:
+    c = re.search(r"当前余额<br><b>(.*?)</b>&nbsp;元", res_html, re.S)
+    if c != None:
+      d = c.groups()
+  if  a != None and c != None:
+    stat = (b[0], modes_dic[b[3]], b[1], b[2], b[4], b[5], b[7], b[8], d[0])
+    return (True, stat)
   else:
-    return (False, 'Query failed, unknown error!')
+    return (False, 'Query failed, online first please!')
 
 def forceoff(account):
   #return (True, 'Previous connection')
@@ -191,7 +201,7 @@ Account information:
 \tGucasNet: %sMB(up)\t%sMB(down)
 \tChinaNet: %sMB(up)\t%sMB(down)
 \tInternet: %sMB(up)\t%sMB(down)
-\tNet  Fee: %s RMB
+\tAccount balance: %s RMB
 ''' % retstr
 #(retstr[0], retstr[1], retstr[2], retstr[3], retstr[4], retstr[5], 
 # retstr[6], retstr[7], retstr[8])
@@ -205,9 +215,10 @@ Account information:
 \tGucasNet: %sMB(up)\t%sMB(down)
 \tChinaNet: %sMB(up)\t%sMB(down)
 \tInternet: %sMB(up)\t%sMB(down)
-\tNet  Fee: %s RMB
-''' % (retstr[0], retstr[1], retstr[2], retstr[3], retstr[4], retstr[5], 
-       retstr[6], retstr[7], retstr[8])
+\tAccount balance: %s RMB
+''' % retstr
+# (retstr[0], retstr[1], retstr[2], retstr[3], retstr[4], retstr[5], 
+#       retstr[6], retstr[7], retstr[8])
     elif(sys.argv[1] == 'off'):
       ret, retstr = query()
       if ret:
@@ -216,9 +227,10 @@ Account information:
 \tGucasNet: %sMB(up)\t%sMB(down)
 \tChinaNet: %sMB(up)\t%sMB(down)
 \tInternet: %sMB(up)\t%sMB(down)
-\tNet  Fee: %s RMB
-''' % (retstr[0], retstr[1], retstr[2], retstr[3], retstr[4],retstr[5], 
-       retstr[6], retstr[7], retstr[8])
+\tAccount balance: %s RMB
+''' % retstr
+# (retstr[0], retstr[1], retstr[2], retstr[3], retstr[4],retstr[5], 
+# retstr[6], retstr[7], retstr[8])
       ret, retstr = offline()
       result += '\n' + retstr
     elif(sys.argv[1] == 'forceoff'):
