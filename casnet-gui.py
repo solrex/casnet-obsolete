@@ -44,11 +44,12 @@ class ARThread(Thread):
   def __init__(self, mainWin):
     super(ARThread, self).__init__()
     self.mainWin = mainWin         # the main CasNetGui object
-    self.last_con = time.time()    # time of last connection
 
   def run(self):
+    self.last_con = time.time()    # time of last connection
     # While mainWin's status signal is not "quit".
     while self.mainWin.status != -1:
+      time.sleep(1)
       Now = time.time()
       # Compared now time with last connection time. Test if the interval is 
       # larger than 600 second(10 min).
@@ -263,6 +264,7 @@ Official Homepage http://share.solrex.cn/casnet/
     if widget != None:
       if widget.get_active() == False:
         return True
+    self.status = 0
     (ret, retstr) = casnet.login(self.account)
     if ret == False:
       self.pop_dialog('登录错误', retstr)
@@ -274,7 +276,6 @@ Official Homepage http://share.solrex.cn/casnet/
     self.stat(None, None)
     self.e_user.set_editable(True)
     self.e_passwd.set_editable(True)
-    self.status = 0
     self.b_online.set_active(False)
     return True
 
