@@ -1,2 +1,2 @@
 set ws=wscript.createobject("wscript.shell")
-ws.run "casnet-gui.py",0
+ws.run "python casnet-gui.py",0

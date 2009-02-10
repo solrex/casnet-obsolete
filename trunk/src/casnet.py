@@ -56,7 +56,7 @@ Official Homepage http://share.solrex.cn/casnet/
   sys.exit(0)
 
 def login(account):
-  #return (True, 'Login succeeded.')
+  return (True, 'Login succeeded.')
   if len(conn_info) == 0:
     conn = httplib.HTTPSConnection(account[3])
     conn_info.insert(0, conn)
@@ -84,7 +84,7 @@ def login(account):
 
 #Global functions
 def online(mode):
-  #return (True, 'Online succeeded.')
+  return (True, 'Online succeeded.')
   conn = conn_info[0]
   headers = conn_info[1]
   conn.request('GET','/php/login_net?mode=%s' % mode, None, headers)
@@ -102,7 +102,7 @@ def online(mode):
     return (False, 'Online failed, unknown error!')
 
 def offline():
-  #return (True, 'Offline succeeded.')
+  return (True, 'Offline succeeded.')
   conn = conn_info[0]
   headers = conn_info[1]
   conn.request('GET','/php/logout_net.php', None, headers)
@@ -114,7 +114,7 @@ def offline():
     return (False, 'Offline failed.')
 
 def query():
-  #return (True, ('1', '2', '3', '4', '5', '6', '7', '8', '9'))
+  return (True, ('1', '2', '3', '4', '5', '6', '7', '8', '9'))
   modes_dic = {'城域':'GucasNet','国内':'ChinaNet','国际':'Internet'}
   conn = conn_info[0]
   headers = conn_info[1]
@@ -144,7 +144,7 @@ def query():
     return (False, 'Query failed, online first please!')
 
 def forceoff(account):
-  #return (True, 'Previous connection')
+  return (True, 'Previous connection')
   conn = conn_info[0]
   headers = conn_info[1]
   conn.request('GET', '/php/useronlinelist.php', None, headers)
