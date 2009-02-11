@@ -102,7 +102,7 @@ def online(mode):
     return (False, 'Online failed, unknown error!')
 
 def offline():
-  return (True, 'Offline succeeded.')
+  #return (True, 'Offline succeeded.')
   conn = conn_info[0]
   headers = conn_info[1]
   conn.request('GET','/php/logout_net.php', None, headers)

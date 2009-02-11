@@ -7,5 +7,5 @@ Comment[zh_CN]=中科院网关登录
 Exec=casnet-gui
 Terminal=false
 Type=Application
-Icon=/usr/share/casnet/pics/casnet.png
+Icon=/usr/share/icons/casnet.png
 Categories=Application;Network;
