@@ -27,7 +27,7 @@ SetCompressor bzip2
 ; Welcome page
 !insertmacro MUI_PAGE_WELCOME
 ; License page
-!insertmacro MUI_PAGE_LICENSE "..\..\licence.txt"
+!insertmacro MUI_PAGE_LICENSE "licence.txt"
 ; Directory page
 !insertmacro MUI_PAGE_DIRECTORY
 ; Instfiles page
@@ -107,10 +107,10 @@ Section "MainSection" SEC01
   File "dist\pango.pyd"
   File "dist\pangocairo.pyd"
   SetOutPath "$INSTDIR\pics"
-  File "dist\pics\casnet.ico"
-  File "dist\pics\casnet.png"
-  File "dist\pics\offline.png"
-  File "dist\pics\online.png"
+  File "pics\casnet.ico"
+  File "pics\casnet.png"
+  File "pics\offline.png"
+  File "pics\online.png"
   SetOutPath "$INSTDIR"
   File "dist\python25.dll"
   SetOutPath "$INSTDIR\share\themes\MS-Windows\gtk-2.0"
