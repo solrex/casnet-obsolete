@@ -53,7 +53,7 @@ class ARThread(Thread):
       Now = time.time()
       # Compared now time with last connection time. Test if the interval is 
       # larger than 600 second(10 min).
-      if self.mainWin.status == 1 and (Now - self.last_con) > 600:
+      if self.mainWin.status == 1 and (Now - self.last_con) > 300:
         self.last_con = Now
         (ret, retstr) = casnet.query()     # Still online?
         if ret == False:
