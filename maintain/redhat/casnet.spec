@@ -1,8 +1,8 @@
 Summary: CASNET Client
 Name: casnet
 Version: 1.3
-Release: 0
-Source0: %{name}_i386.tar.gz
+Release: 1
+Source0: %{name}.tar.gz
 License: GPL
 Group: Network
 %description
@@ -22,3 +22,4 @@ make -e PREFIX=/usr install
 /usr/share/casnet/casnet-gui.py
 /usr/share/casnet/pics/*.png
 /usr/share/applications/casnet.desktop
+/usr/share/icons/casnet.png
