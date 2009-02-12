@@ -24,7 +24,7 @@
 
 import sys
 from os import path
-from threading import Thread
+import threading
 
 import pygtk
 if not sys.platform == 'win32':
@@ -37,27 +37,27 @@ import time
 import casnetconf
 import casnet
 
-gobject.threads_init()
 
 # Auto Reconnect Thread that works in background.
-class ARThread(Thread):
+class ARThread(threading.Thread):
   def __init__(self, mainWin):
     super(ARThread, self).__init__()
     self.mainWin = mainWin         # the main CasNetGui object
+    self.cond = threading.Condition()  # Condition Object for synchronize
 
   def run(self):
-    self.last_con = time.time()    # time of last connection
+    interval = 3                 # time interval to wait, in seconds
+    self.cond.acquire()            # acquire lock
+    self.cond.wait(interval)
     # While mainWin's status signal is not "quit".
     while self.mainWin.status != -1:
-      time.sleep(1)
-      Now = time.time()
-      # Compared now time with last connection time. Test if the interval is 
-      # larger than 600 second(10 min).
-      if self.mainWin.status == 1 and (Now - self.last_con) > 300:
-        self.last_con = Now
-        (ret, retstr) = casnet.query()     # Still online?
+      if self.mainWin.status == 1:
+        (ret, retstr) = casnet.query() # Still online?
         if ret == False:
-          self.mainWin.online(None)        # Reconnect
+          self.mainWin.online(None)    # Reconnect
+      self.cond.release()          # release lock
+      self.cond.acquire()
+      self.cond.wait(interval)
     return True
 
 # Main gui class.
@@ -163,7 +163,10 @@ Official Homepage http://share.solrex.cn/casnet/
     return True
 
   def close_app(self, widget, data=None):
-    self.status = -1
+    self.status = -1               # set status flag to -1
+    self.ar_thread.cond.acquire()
+    self.ar_thread.cond.notify()   # notify ar_thread to quit
+    self.ar_thread.cond.release()
     gtk.main_quit()
     return False
 
@@ -527,6 +530,7 @@ Official Homepage http://share.solrex.cn/casnet/
       self.window.present()
 
 def main():
+  gobject.threads_init()
   CasNetGui()
   gtk.main()
   return 0
