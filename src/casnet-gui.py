@@ -164,9 +164,10 @@ Official Homepage http://share.solrex.cn/casnet/
 
   def close_app(self, widget, data=None):
     self.status = -1               # set status flag to -1
-    self.ar_thread.cond.acquire()
-    self.ar_thread.cond.notify()   # notify ar_thread to quit
-    self.ar_thread.cond.release()
+    if self.ar_thread != None:
+      self.ar_thread.cond.acquire()
+      self.ar_thread.cond.notify()   # notify ar_thread to quit
+      self.ar_thread.cond.release()
     gtk.main_quit()
     return False
 
