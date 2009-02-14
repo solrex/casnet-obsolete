@@ -32,6 +32,7 @@ if not sys.platform == 'win32':
 import gtk
 import gobject
 import time
+import signal
 
 # Import casnet modules.
 import casnetconf
@@ -530,9 +531,23 @@ Official Homepage http://share.solrex.cn/casnet/
     if self.window.is_active() == False:
       self.window.present()
 
+# Signal handler
+def handler(signum, frame):
+  # When shutdown signal received from OS or terminal, go offline first. If
+  # shutdown signal received from keyboard(Ctrl-C, SIGINT), do nothing.
+  if signum == signal.SIGTERM or signum == signal.SIGHUP: 
+    frame.f_locals['casnetgui'].offline(None)
+  # Then close application.
+  frame.f_locals['casnetgui'].close_app(None)
+
 def main():
+  # Set signal handler for Termination, Hangup and Terminal interrupt.
+  signal.signal(signal.SIGTERM, handler)
+  signal.signal(signal.SIGHUP, handler)
+  signal.signal(signal.SIGINT, handler)
+  # Initial threads.
   gobject.threads_init()
-  CasNetGui()
+  casnetgui= CasNetGui()
   gtk.main()
   return 0
 
