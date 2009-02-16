@@ -542,9 +542,10 @@ def handler(signum, frame):
 
 def main():
   # Set signal handler for Termination, Hangup and Terminal interrupt.
-  signal.signal(signal.SIGTERM, handler)
-  signal.signal(signal.SIGHUP, handler)
-  signal.signal(signal.SIGINT, handler)
+  if sys.platform != 'win32':
+    signal.signal(signal.SIGTERM, handler)
+    signal.signal(signal.SIGHUP, handler)
+    signal.signal(signal.SIGINT, handler)
   # Initial threads.
   gobject.threads_init()
   casnetgui= CasNetGui()
