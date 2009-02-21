@@ -535,17 +535,21 @@ Official Homepage http://share.solrex.cn/casnet/
 def handler(signum, frame):
   # When shutdown signal received from OS or terminal, go offline first. If
   # shutdown signal received from keyboard(Ctrl-C, SIGINT), do nothing.
-  if signum == signal.SIGTERM or signum == signal.SIGHUP: 
-    frame.f_locals['casnetgui'].offline(None)
+  if sys.platform != 'win32':
+    if signum == signal.SIGTERM or signum == signal.SIGHUP: 
+      frame.f_locals['casnetgui'].offline(None)
+  else:
+    if signum == signal.SIGTERM:
+      frame.f_locals['casnetgui'].offline(None)
   # Then close application.
   frame.f_locals['casnetgui'].close_app(None)
 
 def main():
   # Set signal handler for Termination, Hangup and Terminal interrupt.
   if sys.platform != 'win32':
-    signal.signal(signal.SIGTERM, handler)
     signal.signal(signal.SIGHUP, handler)
-    signal.signal(signal.SIGINT, handler)
+  signal.signal(signal.SIGTERM, handler)
+  signal.signal(signal.SIGINT, handler)
   # Initial threads.
   gobject.threads_init()
   casnetgui= CasNetGui()
