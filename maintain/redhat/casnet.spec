@@ -1,25 +1,33 @@
-Summary: CASNET Client
-Name: casnet
-Version: 1.3
-Release: 1
-Source0: %{name}.tar.gz
-License: GPL
-Group: Network
+Name:     casnet
+Version:  1.3
+Release:  1
+License:  GPL
+Packager: Solrex Yang
+Summary:  CASNET Client
+Group:    Network
+Source:   %{name}-%{version}.tar.gz
+URL:      http://share.solrex.cn/casnet/
+Prefix:   /usr
+
 %description
-GUCAS IP Gateway Client with GUI and CLI.
-Official homepage http://share.solrex.cn/casnet/
+ CASNET is a gui client for ip gateway of GUCAS(Graduate University of Chinese
+ Academy of Sciences), which is written in Python and PyGtk.
+
 %prep
 %setup -q
+
 %build
+
 %install
-make -e PREFIX=/usr install
+make -e PREFIX=%{prefix} install
+
 %files
-/usr/bin/casnetconf
-/usr/bin/casnet
-/usr/bin/casnet-gui
-/usr/share/casnet/casnetconf.py
-/usr/share/casnet/casnet.py
-/usr/share/casnet/casnet-gui.py
-/usr/share/casnet/pics/*.png
-/usr/share/applications/casnet.desktop
-/usr/share/icons/casnet.png
+%{prefix}/bin/casnetconf
+%{prefix}/bin/casnet
+%{prefix}/bin/casnet-gui
+%{prefix}/share/casnet/casnetconf.py
+%{prefix}/share/casnet/casnet.py
+%{prefix}/share/casnet/casnet-gui.py
+%{prefix}/share/casnet/pics/*.png
+%{prefix}/share/applications/casnet.desktop
+%{prefix}/share/icons/casnet.png
