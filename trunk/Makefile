@@ -28,8 +28,8 @@ uninstall:
 	# Uninstalling CASNET+GUI
 	@rm -vf $(PREFIX)/bin/casnet*
 	@rm -rvf $(PREFIX)/share/casnet
-	@rm -vf $(PREFIX)/applications/casnet.desktop
-	@rm -vf $(PREFIX)/icons/casnet.png
+	@rm -vf $(PREFIX)/share/applications/casnet.desktop
+	@rm -vf $(PREFIX)/share/icons/casnet.png
 
 clean:
 	@rm -f *.pyc *.log
