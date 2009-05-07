@@ -1,5 +1,28 @@
+# --------------------------------------------------------------------------
+# CASNET(IP Gateway Client for GUCAS)
+# Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
+#  Official Homepage http://share.solrex.cn/casnet/
+# --------------------------------------------------------------------------
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# --------------------------------------------------------------------------
 
+# Your install destination.
 PREFIX=/usr/local
+# Your install options.
+#INS_FLAGS=-o root -g root
+INS_FLAGS=
 SRCDIR=src
 SRCS=$(SRCDIR)/casnetconf.py $(SRCDIR)/casnet.py $(SRCDIR)/casnet-gui.py
 
@@ -8,14 +31,15 @@ all:
 install: $(SRCS)
 	# Installing CASNET+GUI
 	# Creating directories
-	@install -v -d $(PREFIX)/share/casnet/pics/
-	@install -v -d $(PREFIX)/share/applications/
-	@install -v -d $(PREFIX)/share/icons
-	@install -v -d $(PREFIX)/bin
+	@install $(INS_FLAGS) -v -d $(PREFIX)/share/casnet/
+	@install $(INS_FLAGS) -v -d $(PREFIX)/share/casnet/pics/
+	@install $(INS_FLAGS) -v -d $(PREFIX)/share/applications/
+	@install $(INS_FLAGS) -v -d $(PREFIX)/share/icons
+	@install $(INS_FLAGS) -v -d $(PREFIX)/bin
 	# Copying files to dest dir
-	@install -v src/*.py $(PREFIX)/share/casnet/
-	@install -v -m 644 src/pics/* $(PREFIX)/share/casnet/pics/
-	@install -v -m 644 src/pics/casnet.png $(PREFIX)/share/icons/
+	@install $(INS_FLAGS) -v src/*.py $(PREFIX)/share/casnet/
+	@install $(INS_FLAGS) -v -m 644 src/pics/* $(PREFIX)/share/casnet/pics/
+	@install $(INS_FLAGS) -v -m 644 src/pics/casnet.png $(PREFIX)/share/icons/
 	# Creating desktop menu entry
 	echo -n "[Desktop Entry]\nEncoding=UTF-8\nName=CAS NET\n\
 Name[zh_CN]=中科院网关登录\nComment=CAS NET Online\nComment[zh_CN]=中科院网关登录\n\
@@ -28,7 +52,7 @@ Icon=$(PREFIX)/share/icons/casnet.png\nCategories=Application;Network;"\
 	@ln -svf ../share/casnet/casnet-gui.py $(PREFIX)/bin/casnet-gui;
 
 uninstall:
-	# Uninstalling CASNET+GUI
+	# Uninstall $(INS_FLAGS)ing CASNET+GUI
 	@rm -vf $(PREFIX)/bin/casnet*
 	@rm -rvf $(PREFIX)/share/casnet
 	@rm -vf $(PREFIX)/share/applications/casnet.desktop

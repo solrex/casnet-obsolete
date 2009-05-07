@@ -1,10 +1,12 @@
 Package: casnet
 Version: 1.3-1
-Priority: extra
-Homepage: http://share.solrex.cn/casnet/
-Section: net
-Maintainer: Wenbo Yang <http://solrex.cn>
 Architecture: all
+Maintainer: Wenbo Yang <http://solrex.cn>
+Installed-Size: 100
+Depends: python (>=2.3)
+Section: net
+Priority: extra
 Description: GUCAS IP Gateway Client with GUI and CLI.
  CASNET is a gui client for ip gateway of GUCAS(Graduate University of Chinese 
  Academy of Sciences), which is written in Python and PyGtk.
+Homepage: http://share.solrex.cn/casnet/
