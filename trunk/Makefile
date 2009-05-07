@@ -41,8 +41,8 @@ install: $(SRCS)
 	@install $(INS_FLAGS) -v -m 644 src/pics/* $(PREFIX)/share/casnet/pics/
 	@install $(INS_FLAGS) -v -m 644 src/pics/casnet.png $(PREFIX)/share/icons/
 	# Creating desktop menu entry
-	echo -n "[Desktop Entry]\nEncoding=UTF-8\nName=CAS NET\n\
-Name[zh_CN]=中科院网关登录\nComment=CAS NET Online\nComment[zh_CN]=中科院网关登录\n\
+	echo -n "[Desktop Entry]\nEncoding=UTF-8\nName=CASNET\n\
+Name[zh_CN]=中科院网关登录\nComment=CASNET Online\nComment[zh_CN]=中科院网关登录\n\
 Exec=casnet-gui\nTerminal=false\nType=Application\n\
 Icon=$(PREFIX)/share/icons/casnet.png\nCategories=Application;Network;"\
  > $(PREFIX)/share/applications/casnet.desktop

@@ -19,7 +19,7 @@ Prefix:   /usr
 %build
 
 %install
-make -e PREFIX=%{prefix} install
+make -e PREFIX=%{prefix} -e INS_FLAGS="-o root -g root" install
 
 %files
 %{prefix}/bin/casnetconf

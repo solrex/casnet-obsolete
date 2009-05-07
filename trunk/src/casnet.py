@@ -50,8 +50,8 @@ Examples:
 *NOTE*: Before use "casnet", you must configure your account with
         "casnetconf" command. 
 
-CASNET 1.3 by Wenbo Yang<solrex@gmail.com>
-Official Homepage http://share.solrex.cn/casnet/
+CASNET 1.3 by Wenbo Yang <http://solrex.cn>
+Homepage http://share.solrex.cn/casnet/
 '''
   sys.exit(0)
 
