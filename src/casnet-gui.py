@@ -93,8 +93,8 @@ class CasNetGui:
   # Show help dialog window.
   def help(self, widget, data=None):
     help_str = '''CASNET 1.3 (20090209)
-Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
-Official Homepage http://share.solrex.cn/casnet/
+Copyright (C) 2008-2009 Wenbo Yang <http://solrex.cn>
+Homepage http://share.solrex.cn/casnet/
 \n　　CASNET 是中科院内部 IP 控制网关登录客户端，支持 Linux
 和 Windows 双系统。此软件使用 Python 语言写成，同时支持命令
 行和图形界面，使用简单，安装方便，实乃中国科学院 IP 网关用户居
@@ -102,7 +102,7 @@ Official Homepage http://share.solrex.cn/casnet/
 \n本软件遵从 GPL 协议<http://www.gnu.org/licenses/gpl.txt>，
 在此协议保护之下，您可以自由地使用、修改或分发本软件。
 \n感谢列表：
-　　giv<goldolphin@163.com>: 命令行客户端脚本的原型作者
+　　giv@kyxk.net: 命令行客户端脚本的原型作者
 '''
     self.pop_dialog('关于 CASNET', help_str)
     return True
@@ -300,7 +300,7 @@ Official Homepage http://share.solrex.cn/casnet/
 
     # Set main window's attributes.
     self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
-    self.window.set_title('中科院网关跨平台登录客户端')
+    self.window.set_title('CASNET')
     self.window.set_icon_from_file(path.join(self.iconpath, 'casnet.png'))
     self.window.set_position(gtk.WIN_POS_CENTER_ALWAYS)
     self.window.set_resizable(False)
