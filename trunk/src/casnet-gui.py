@@ -286,13 +286,15 @@ Homepage http://share.solrex.cn/casnet/
 
   def __init__(self):
     # Find casnet icons path.
-    file_dir = path.abspath(sys.path[0])
     if sys.platform == 'win32':
+      file_dir = path.dirname(sys.argv[0]);
       self.iconpath = path.join(file_dir.decode('gbk').encode('utf8'), 'pics')
     else:
+      file_dir = path.abspath(sys.path[0])
       self.iconpath = path.join(file_dir, 'pics')
     if not path.isdir(self.iconpath):
       self.pop_dialog('Error', 'Can not find casnet icons.')
+      exit()
     # Get saved account information.
     s = casnetconf.show()
     if s != False:

@@ -8,7 +8,7 @@ setup(
 
   windows = [
               {
-                'script': 'casnet-gui.py',
+                'script': 'casnet-gui.pyw',
                 'icon_resources': [(1, 'pics/casnet.ico')],
               }
             ],
