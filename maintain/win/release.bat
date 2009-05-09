@@ -12,6 +12,6 @@ pause
 makensis.exe casnet.nsi
 move casnet_setup.exe ..\
 cd ..
-::rmdir /S /Q casnet
+rmdir /S /Q casnet
 echo "Íê³É"
 pause
