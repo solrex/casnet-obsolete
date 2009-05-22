@@ -1,16 +1,16 @@
 #!/bin/bash
+RPMDIR=/usr/src/rpm
 VERSION=`../version -v`
 RELEASE=`../version -r`
 mkdir -p casnet-$VERSION
 cp -r ../../src casnet-$VERSION
-cp -r ../../misc casnet-$VERSION
 cp ../../Makefile casnet-$VERSION
 tar -czvf casnet-$VERSION.tar.gz casnet-$VERSION/ > /dev/null
-mv casnet-$VERSION.tar.gz /usr/src/redhat/SOURCES
+cp casnet-$VERSION.tar.gz $RPMDIR/SOURCES
 sed -i -e "s/^Ver.*/Version: $VERSION/g;s/^Rel.*/Release: $RELEASE/g" casnet.spec
-cp casnet.spec /usr/src/redhat/SPECS
-cd /usr/src/redhat/SPECS
+cp casnet.spec $RPMDIR/SPECS
+cd $RPMDIR/SPECS
 rpmbuild -ba casnet.spec
 cd -
-cp /usr/src/redhat/RPMS/i386/casnet*.rpm .
-rm -rf casnet-$VERSION casnet-$VERSION.tar.gz
+cp $RPMDIR/RPMS/i386/casnet-$VERSION-${RELEASE}*.rpm ../casnet-$VERSION-${RELEASE}_all.rpm
+rm -rf casnet-$VERSION casnet-$VERSION*

@@ -1,6 +1,6 @@
 Name:     casnet
-Version:  1.3
-Release:  1
+Version: 1.3
+Release: 2
 License:  GPL
 Packager: Solrex Yang
 Summary:  CASNET Client
