@@ -61,7 +61,7 @@ Examples:
 Configure file is saved in ~/.casnet/account, use "less ~/.casnet/account"
 to view your account setting.
 
-CASNET 1.3 by Wenbo Yang<solrex@gmail.com>
+casnet-1.3-2 by Wenbo Yang<solrex@gmail.com>
 Official Homepage http://share.solrex.cn/casnet/
 '''
   sys.exit(0)
