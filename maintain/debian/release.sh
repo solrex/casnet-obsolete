@@ -9,5 +9,5 @@ cd maintain/debian/fakeroot
 sed -i -e "s@^Icon=.*@Icon=/usr/share/icons/casnet.png@g" usr/share/applications/casnet.desktop
 find usr/ -type f -exec md5sum {} + > DEBIAN/md5sums
 cd ../
-dpkg -b fakeroot/ ../casnet-$VERSION-all.deb
+dpkg -b fakeroot/ ../casnet-${VERSION}_all.deb
 rm -rf fakeroot
