@@ -1,0 +1,14 @@
+#!/bin/bash
+VERSION="1.3"
+RELEASE="2"
+if [ $# -lt 1 ]; then
+  echo $VERSION-$RELEASE
+elif [ $1 = '-v' ]; then
+  echo $VERSION
+elif [ $1 = '-r' ]; then
+  echo $RELEASE
+elif [ $1 = '-d' ]; then 
+  date +%F
+else
+  echo $VERSION-$RELEASE
+fi
