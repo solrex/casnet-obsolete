@@ -220,7 +220,7 @@ Homepage http://share.solrex.cn/casnet/
     return True
 
   def online(self, widget, data=None):
-    if widget != None:
+    if widget != None and isinstance(widget, gtk.ToggleButton):
       if widget.get_active() == False:
         return True
     # Disable changing username and passwd before login.
@@ -266,7 +266,7 @@ Homepage http://share.solrex.cn/casnet/
     return True
 
   def offline(self, widget, data=None):
-    if widget != None:
+    if widget != None and isinstance(widget, gtk.ToggleButton):
       if widget.get_active() == False:
         return True
     self.status = 0
