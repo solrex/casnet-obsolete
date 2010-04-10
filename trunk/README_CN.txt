@@ -1,7 +1,7 @@
 中国科学院 IP 网关登录客户端(CASNET)
 
-Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
-Official Homepage http://share.solrex.cn/casnet/
+Copyright (C) 2008 Wenbo Yang <http://solrex.org>
+Official Homepage http://share.solrex.org/casnet/
 
 本软件遵从 GPL 协议<http://www.gnu.org/licenses/gpl.txt>，在此协议保护之下，
 您可以自由地使用、修改或分发本软件。
@@ -57,5 +57,5 @@ CAS Net 是中科院内部 IP 控制网关登录客户端，同时支持 Linux �
 
 ===== BUG 报告 =====
 
-如果您在使用中发现 BUG，请将 BUG 提交到 http://share.solrex.cn/casnet/bugs.html
+如果您在使用中发现 BUG，请将 BUG 提交到 http://share.solrex.org/casnet/bugs.html
 非常感谢！

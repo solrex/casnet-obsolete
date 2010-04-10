@@ -4,8 +4,8 @@
 """
  --------------------------------------------------------------------------
  CASNET(IP Gateway Client for GUCAS)
- Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
- Official Homepage http://share.solrex.cn/casnet/
+ Copyright (C) 2008 Wenbo Yang <http://solrex.org>
+ Official Homepage http://share.solrex.org/casnet/
  --------------------------------------------------------------------------
 
  This program is free software: you can redistribute it and/or modify
@@ -50,8 +50,8 @@ Examples:
 *NOTE*: Before use "casnet", you must configure your account with
         "casnetconf" command. 
 
-casnet-1.3-2 by Wenbo Yang <http://solrex.cn>
-Homepage http://share.solrex.cn/casnet/
+casnet-1.3-2 by Wenbo Yang <http://solrex.org>
+Homepage http://share.solrex.org/casnet/
 '''
   sys.exit(0)
 
@@ -178,6 +178,8 @@ def forceoff(account):
 def main(account=[], verbose=True):
   if len(account) != 9:
     s = casnetconf.show()
+    if s == False and verbose == True:
+      usage()
     account = s.split(':')
 
   #Global settings

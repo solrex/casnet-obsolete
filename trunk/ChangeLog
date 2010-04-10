@@ -1,12 +1,12 @@
 
-2009.02.14 Wenbo Yang <http://solrex.cn>
+2009.02.14 Wenbo Yang <http://solrex.org>
 	* casnet-gui.py: Added signal handler, modified thread control method.
 
 === 1.3-1 ===
-2009.02.11 Wenbo Yang <http://solrex.cn>
+2009.02.11 Wenbo Yang <http://solrex.org>
 	* NEWS: Version 1.3-1 released. Bug fix version.
 
-2009.02.11 Wenbo Yang <http://solrex.cn>
+2009.02.11 Wenbo Yang <http://solrex.org>
 	* Added some maintain scripts.
 	* Changed directories structure, as bellow:
 	.
@@ -44,7 +44,7 @@
 
 
 === 1.3-0 ===
-2009.02.09 Wenbo Yang <http://solrex.cn>
+2009.02.09 Wenbo Yang <http://solrex.org>
 	* NEWS: Version 1.3-0 released.
 
 	* casnetconf.py: Added 2 domain in account file for 2 new options.
@@ -56,7 +56,7 @@
 
 
 === 1.2-2 ===
-2008.06.13 Wenbo Yang <http://solrex.cn>
+2008.06.13 Wenbo Yang <http://solrex.org>
 	* NEWS: Version 1.2-2 released.
 
 	* casnetconf.py,
@@ -66,7 +66,7 @@
 	    Fixed duplicated online warning report bug related to GUI.
 
 === 1.2-1 ===
-2008.06.07 Wenbo Yang <http://solrex.cn>
+2008.06.07 Wenbo Yang <http://solrex.org>
 	* NEWS: Version 1.2-1 released.
 
 	* casnet.py: Added account locked case, fixed some bugs.
@@ -81,7 +81,7 @@
 	* README_CN.UTF8 -> README_CN.UTF8.txt: Changed file extension.
 
 === 1.1-1 ===
-2008.05.09 Wenbo Yang <http://solrex.cn>
+2008.05.09 Wenbo Yang <http://solrex.org>
 	
 	* NEWS: Version 1.1-1 released.
 
@@ -90,7 +90,7 @@
 					 Added trayicon(StatusIcon) right click menu.
 
 === 1.0-2 ===
-2008.04.05 Wenbo Yang <http://solrex.cn>
+2008.04.05 Wenbo Yang <http://solrex.org>
 
 	* NEWS: Version 1.0-2 released, with .deb and .rpm format.
 
@@ -100,7 +100,7 @@
 	* README_CN.GBK: Add bug list URL.
 
 === 1.0 ===
-2008.04.03 Wenbo Yang <http://solrex.cn>
+2008.04.03 Wenbo Yang <http://solrex.org>
 
 	* NEWS: Version 1.0 released.
 
@@ -119,10 +119,10 @@
 	* README_CN.GBK: Add readme file.
 
 === 1.0 Pre ===
-2008.04.01 Wenbo Yang <http://solrex.cn>
+2008.04.01 Wenbo Yang <http://solrex.org>
 
 	* NEWS: Fools' Day, a joking 1.0 pre release.
 
-2008.03.31 Wenbo Yang <http://solrex.cn>
+2008.03.31 Wenbo Yang <http://solrex.org>
 
 	* casnet-gui.py: Draw the initial GUI interface. 

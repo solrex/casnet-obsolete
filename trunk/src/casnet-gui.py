@@ -3,8 +3,8 @@
 """
  --------------------------------------------------------------------------
  CASNET(IP Gateway Client for GUCAS)
- Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
- Official Homepage http://share.solrex.cn/casnet/
+ Copyright (C) 2008 Wenbo Yang <http://solrex.org>
+ Official Homepage http://share.solrex.org/casnet/
  --------------------------------------------------------------------------
 
  This program is free software: you can redistribute it and/or modify
@@ -93,8 +93,8 @@ class CasNetGui:
   # Show help dialog window.
   def help(self, widget, data=None):
     help_str = '''casnet-1.3-2
-Copyright (C) 2008-2009 Wenbo Yang <http://solrex.cn>
-Homepage http://share.solrex.cn/casnet/
+Copyright (C) 2008-2009 Wenbo Yang <http://solrex.org>
+Homepage http://share.solrex.org/casnet/
 \n　　CASNET 是中科院内部 IP 控制网关登录客户端，支持 Linux
 和 Windows 双系统。此软件使用 Python 语言写成，同时支持命令
 行和图形界面，使用简单，安装方便，实乃中国科学院 IP 网关用户居
