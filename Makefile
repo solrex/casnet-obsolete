@@ -1,7 +1,7 @@
 # --------------------------------------------------------------------------
 # CASNET(IP Gateway Client for GUCAS)
-# Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
-#  Official Homepage http://share.solrex.cn/casnet/
+# Copyright (C) 2008 Wenbo Yang <http://solrex.org>
+#  Official Homepage http://share.solrex.org/casnet/
 # --------------------------------------------------------------------------
 #
 # This program is free software: you can redistribute it and/or modify

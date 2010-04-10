@@ -3,8 +3,8 @@
 """
  --------------------------------------------------------------------------
  CASNET(IP Gateway Client for GUCAS)
- Copyright (C) 2008 Wenbo Yang <solrex@gmail.com>
- Official Homepage http://share.solrex.cn/casnet/
+ Copyright (C) 2008 Wenbo Yang <http://solrex.org>
+ Official Homepage http://share.solrex.org/casnet/
  --------------------------------------------------------------------------
 
  This program is free software: you can redistribute it and/or modify
@@ -61,15 +61,15 @@ Examples:
 Configure file is saved in ~/.casnet/account, use "less ~/.casnet/account"
 to view your account setting.
 
-casnet-1.3-2 by Wenbo Yang<solrex@gmail.com>
-Official Homepage http://share.solrex.cn/casnet/
+casnet-1.3-2 by Wenbo Yang<http://solrex.org>
+Official Homepage http://share.solrex.org/casnet/
 '''
   sys.exit(0)
 
 # Get user information from account file.
 def show():
   # Get the path to account file, location different for POSIX and Windows.
-  if sys.platform == 'win32':
+  if sys.platform == 'win32' or sys.platform == 'cygwin':
     homedir = os.getenv('HOMEDRIVE')
     homedir += os.getenv('HOMEPATH').decode('gbk').encode('utf8')
   else:
@@ -131,7 +131,7 @@ def input_arg(str, option):
 # Write account information in options dictionary to account file.
 def write_ops():
   # Get the path to account file, location different for POSIX and Windows.
-  if sys.platform == 'win32':
+  if sys.platform == 'win32' or sys.platform == 'cygwin':
     homedir = os.getenv('HOMEDRIVE')
     homedir += os.getenv('HOMEPATH').decode('gbk').encode('utf8')
   else:

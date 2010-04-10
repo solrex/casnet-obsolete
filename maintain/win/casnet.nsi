@@ -4,7 +4,7 @@
 !define PRODUCT_NAME "CASNET"
 !define PRODUCT_VERSION "1.3"
 !define PRODUCT_PUBLISHER "Solrex Yang"
-!define PRODUCT_WEB_SITE "http://share.solrex.cn/casnet/"
+!define PRODUCT_WEB_SITE "http://share.solrex.org/casnet/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\casnet-gui.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"

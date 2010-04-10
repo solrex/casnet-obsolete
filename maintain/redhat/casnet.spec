@@ -6,7 +6,7 @@ Packager: Solrex Yang
 Summary:  CASNET Client
 Group:    Network
 Source:   %{name}-%{version}.tar.gz
-URL:      http://share.solrex.cn/casnet/
+URL:      http://share.solrex.org/casnet/
 Prefix:   /usr
 
 %description
